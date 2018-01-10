@@ -14,6 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
 /*
 海报制作
 上传图片
