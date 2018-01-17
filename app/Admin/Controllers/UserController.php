@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use App\Models\Member;
+use App\User;
 
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -11,7 +11,7 @@ use Encore\Admin\Layout\Content;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\ModelForm;
 
-class MemberController extends Controller
+class UserController extends Controller
 {
     use ModelForm;
 
@@ -71,7 +71,7 @@ class MemberController extends Controller
      */
     protected function grid()
     {
-        return Admin::grid(Member::class, function (Grid $grid) {
+        return Admin::grid(User::class, function (Grid $grid) {
 
             $grid->id('ID')->sortable();
             $grid->name('用户名');
@@ -104,7 +104,7 @@ class MemberController extends Controller
      */
     protected function form()
     {
-        return Admin::form(Member::class, function (Form $form) {
+        return Admin::form(User::class, function (Form $form) {
 
             $form->display('id', 'ID');
 

@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::any('/wechat', 'WeChatController@serve');
+
+Route::get('/user', 'UserController@index')->name('user.index');
