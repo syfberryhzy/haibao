@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://haibao.app'),
 
     /*
     |--------------------------------------------------------------------------
@@ -167,7 +167,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        //  Orangehill\Iseed\IseedServiceProvider::class,
         /*
          * Application Service Providers...
          */

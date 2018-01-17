@@ -91,8 +91,8 @@ class CategoryController extends Controller
         return Admin::form(Category::class, function (Form $form) {
 
             $form->display('id', 'ID');
-            $form->text('title', '标题');
-            $form->select('parent_id', '父级')->options(Category::where('parent_id', 0)->get()->pluck('title', 'id'));
+            $form->text('title', '标题')->rules('required|min:2');
+            $form->select('parent_id', '父级')->options(Category::where('parent_id', 0)->get()->pluck('title', 'id'))->default(1);
             $form->number('order', '排序')->default(0);
             $states = [
               'on' => ['value' => '1', 'text' => '可用',  'color' => 'success'],
