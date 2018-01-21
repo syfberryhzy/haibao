@@ -77,7 +77,10 @@ class GalleryController extends Controller
             $grid->id('ID')->sortable();
             $grid->category_id('分类编号');
             $grid->title('名称');
-            $grid->value('图片')->image();
+            // $grid->value('图片')->image();
+            $grid->value('图片')->display(function ($img) {
+              return '<img src="'. $img .'" style="width:180px;height:150px;">';
+            });
             $grid->description('简述');
             $grid->click_num('点击量');
             $grid->use_num('使用量');

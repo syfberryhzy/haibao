@@ -17,7 +17,7 @@ class CreateGalleriesTable extends Migration
             $table->increments('id');
             $table->string('title')->comment('图片名');
             $table->string('description')->comment('简述');
-            $table->unsignedInteger('catgory_id');
+            $table->unsignedInteger('category_id');
             $table->string('value')->comment('图片');
             $table->Integer('click_num')->default(0)->comment('点击数');
             $table->Integer('use_num')->default(0)->comment('使用数');

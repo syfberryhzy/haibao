@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use App\Models\Member;
+use App\Models\User;
 
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -11,7 +11,7 @@ use Encore\Admin\Layout\Content;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\ModelForm;
 
-class MemberController extends Controller
+class UserController extends Controller
 {
     use ModelForm;
 
@@ -25,7 +25,7 @@ class MemberController extends Controller
         return Admin::content(function (Content $content) {
 
             $content->header('用户管理');
-            $content->description('微信用户信息都在这里哦～');
+            $content->description('所有用户信息都在这里哦～');
 
             $content->body($this->grid());
         });
@@ -71,12 +71,16 @@ class MemberController extends Controller
      */
     protected function grid()
     {
-        return Admin::grid(Member::class, function (Grid $grid) {
+        return Admin::grid(User::class, function (Grid $grid) {
 
             $grid->id('ID')->sortable();
             $grid->name('用户名');
             $grid->avatar('头像')->image();
-            $grid->gender('性别');
+            $grid->gender('性别')->display(function ($sex) {
+              $sex = $sex == 1 ? "boy.png" : "girl.png";
+              $url = config('app.url')."/images/". $sex;
+              return '<img src="'. $url. '" style="width:50px;height:50px;">';
+            });
             $grid->openid('标识');
             $grid->status('状态');
             $grid->created_at('创建时间');
@@ -104,7 +108,7 @@ class MemberController extends Controller
      */
     protected function form()
     {
-        return Admin::form(Member::class, function (Form $form) {
+        return Admin::form(User::class, function (Form $form) {
 
             $form->display('id', 'ID');
 
