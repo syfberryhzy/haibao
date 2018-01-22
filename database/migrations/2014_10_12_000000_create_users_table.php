@@ -16,10 +16,11 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->comment('名称');
-            $table->Tinyinteger('gender')->comment('性别 1=男，2=女')->default(1);
+            $table->tinyInteger('gender')->comment('性别 1=男，2=女')->default(1);
             $table->string('avatar')->comment('头像');
             $table->string('openid')->comment('微信标识')->nullable();
-            $table->Tinyinteger('status')->default(0)->comment('关注状态 1=关注');
+            $table->tinyInteger('subscribe')->comment('是否关注 1=关注 0=未关注');
+            $table->tinyInteger('status')->default(0)->comment('是否启动 1=启用');
             $table->timestamps();
         });
     }
