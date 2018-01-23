@@ -18,7 +18,13 @@ Route::get('/login/openid/{openid}', 'PublicController@login')->name('login');
 
 Route::get('/user/poster/create', 'PosterController@create')->name('poster.create');
 
+Route::get('/user/poster', 'PosterController@index')->name('poster.index');
+
 Route::get('/lettres', 'LettreController@index')->name('letter.index');
+
+Route::get('/pictures', 'PictureController@index')->name('picture.index');
+
+Route::get('/categories/{category}/lettres', 'CategoryController@lettres')->name('category.lettres');
 
 Route::get('/categories/{category}', 'CategoryController@show')->name('category.show');
 

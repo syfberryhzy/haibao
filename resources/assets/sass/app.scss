@@ -42,11 +42,18 @@
         }
     }
 }
+.weui-panel__hd {
+    display: flex;
+    justify-content: space-between;
+}
+a.picture-more {
+    color: #1684B2;
+}
 
 .poster-create-bottom {
     height: 50vh;
     margin: 0 0.75em;
-
+    
     a.belles-lettres {
         padding: .267rem 0;
         width: 100%;

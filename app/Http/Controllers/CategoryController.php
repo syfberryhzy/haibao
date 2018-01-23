@@ -10,4 +10,9 @@ class CategoryController extends Controller
     {
         return view('category.show');
     }
+
+    public function lettres()
+    {
+        return view('category.lettres');
+    }
 }

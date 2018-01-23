@@ -47,6 +47,19 @@
   font-size: 14px;
 }
 
+.weui-panel__hd {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+a.picture-more {
+  color: #1684B2;
+}
+
 .poster-create-bottom {
   height: 50vh;
   margin: 0 0.75em;

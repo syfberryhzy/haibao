@@ -10,4 +10,9 @@ class PosterController extends Controller
     {
         return view('poster.create');
     }
+
+    public function index()
+    {
+        return view('poster.index');
+    }
 }
