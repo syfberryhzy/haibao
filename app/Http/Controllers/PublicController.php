@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use EasyWeChat;
-use App\User;
+use App\Models\User;
 
 class PublicController extends Controller
 {

@@ -10,9 +10,9 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 require('amfe-flexible');
+require('weui');
 
-import 'weui';
-import weui from 'weui.js';
+window.weui = require('weui.js');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -20,6 +20,10 @@ import weui from 'weui.js';
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+Vue.component('user-index', require('./pages/UserIndex.vue'));
+Vue.component('poster-create', require('./pages/PosterCreate.vue'));
+Vue.component('category-lettres', require('./pages/CategoryLettres.vue'));
+Vue.component('lettre-index', require('./pages/LettreIndex.vue'));
 Vue.component('search-bar', require('./components/SearchBar.vue'));
 
 const app = new Vue({

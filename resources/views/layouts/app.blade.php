@@ -9,6 +9,19 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+    <script>
+        window.App = <?php echo json_encode([
+            'user' => Auth::user(),
+            'signedIn' => Auth::check(),
+            'wxconfig' => config('app.debug') ? '' : $js->config(array(
+               'onMenuShareTimeline',
+               'onMenuShareAppMessage',
+               'onMenuShareQQ',
+               'onMenuShareWeibo',
+               'onMenuShareQZone',
+            ), false)
+        ]); ?>
+    </script>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">

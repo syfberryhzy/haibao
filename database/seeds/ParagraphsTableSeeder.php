@@ -12,7 +12,7 @@ class ParagraphsTableSeeder extends Seeder
      */
     public function run()
     {
-        $category_ids = ['12', '13', '14', '15', '16', '17', '18', '19'];
+        $category_ids = ['8', '9', '10', '11', '12', '13'];
         $faker = app(Faker\Generator::class);
 
         $paragraphs = factory(Paragraph::class)->times(50)->make()->each(function ($paragraph) use ($faker, $category_ids) {

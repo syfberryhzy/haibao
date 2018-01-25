@@ -7,6 +7,9 @@
 
 // Bootstrap
 // @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+body {
+    background: $body-bg;
+}
 .container {
     background: $body-bg;
     width: 100vw;

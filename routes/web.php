@@ -20,7 +20,9 @@ Route::get('/user/poster/create', 'PosterController@create')->name('poster.creat
 
 Route::get('/user/poster', 'PosterController@index')->name('poster.index');
 
-Route::get('/lettres', 'LettreController@index')->name('letter.index');
+Route::get('/lettres', 'LettreController@index')->name('lettre.index');
+
+Route::post('/lettres/{paragraph}', 'LettreController@store')->name('lettre.store');
 
 Route::get('/pictures', 'PictureController@index')->name('picture.index');
 
