@@ -21,6 +21,7 @@ class CreateGalleriesTable extends Migration
             $table->string('value')->comment('图片');
             $table->Integer('click_num')->default(0)->comment('点击数');
             $table->Integer('use_num')->default(0)->comment('使用数');
+            $table->Tinyinteger('status')->comment('状态 默认可用 1=可用，0=禁用')->default('1');
             $table->timestamps();
         });
     }

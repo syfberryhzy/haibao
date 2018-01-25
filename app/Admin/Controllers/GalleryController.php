@@ -81,10 +81,20 @@ class GalleryController extends Controller
             $grid->value('图片')->display(function ($img) {
               return '<img src="'. $img .'" style="width:180px;height:150px;">';
             });
-            $grid->description('简述');
-            $grid->click_num('点击量');
-            $grid->use_num('使用量');
-            $grid->status('状态');
+            $grid->description('简述')->display(function ($str) {
+              return '<div style="width:250px;height:120px;">'. $str . '</div>';
+            });
+            $grid->click_num('数据信息')->display(function($click_num) {
+              return '点击量: '.$this->click_num.'<br/>'.'使用量: '.$this->use_num;
+            });
+            // $grid->click_num('点击量');
+            // $grid->use_num('使用量');
+
+            $states = [
+              ['text' => '启用', 'value' => '1', 'color' => 'success'],
+              ['text' => '禁用', 'value' => '０', 'color' => 'danger'],
+            ];
+            $grid->status('状态')->switch($states);
             $grid->created_at('创建时间');
             // $grid->updated_at('编辑时间');
         });
