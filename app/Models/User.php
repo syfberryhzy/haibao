@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use EasyWeChat;
 use Illuminate\Notifications\Notifiable;

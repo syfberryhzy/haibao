@@ -123,9 +123,9 @@ class AdminMenuTableSeeder extends Seeder
                 'order' => 0,
                 'title' => '用户管理',
                 'icon' => 'fa-child',
-                'uri' => '/member',
+                'uri' => '/users',
                 'created_at' => '2018-01-06 18:54:09',
-                'updated_at' => '2018-01-06 18:54:09',
+                'updated_at' => '2018-01-21 08:44:54',
             ),
             10 => 
             array (

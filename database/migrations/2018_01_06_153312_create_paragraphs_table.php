@@ -15,7 +15,7 @@ class CreateParagraphsTable extends Migration
     {
         Schema::create('paragraphs', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('catgory_id');
+            $table->unsignedInteger('category_id');
             $table->string('title')->comment('美文名');
             $table->string('author')->comment('作者');
             // $table->string('contract')->comment('来源（书名）');

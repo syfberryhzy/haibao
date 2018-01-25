@@ -76,10 +76,17 @@ class ParagraphController extends Controller
             $grid->category_id('分类编号');
             $grid->title('来源（作品名）');
             $grid->author('作者');
-            $grid->value('内容');
-            $grid->click_num('点击量');
-            $grid->use_num('使用量');
-            $grid->status('状态');
+            $grid->value('内容')->display(function ($str) {
+              return '<div style="width:300px;height:130px;">'. $str .'</div>';
+            });
+            $grid->click_num('数据信息')->display(function($click_num) {
+              return '点击量: '.$this->click_num.'<br/>'.'使用量: '.$this->use_num;
+            });
+            $states = [
+              ['text' => '启用', 'value' => '1', 'color' => 'success'],
+              ['text' => '禁用', 'value' => '０', 'color' => 'danger']
+            ];
+            $grid->status('状态')->switch($states);
             $grid->created_at('创建时间');
             // $grid->updated_at('编辑时间');
         });
@@ -101,6 +108,11 @@ class ParagraphController extends Controller
             $form->textarea('value', '内容');
             $form->number('click_num', '点击量')->default(0);
             $form->number('use_num', '使用量')->default(0);
+            $states = [
+              ['text' => '启用', 'value' => '1', 'color' => 'success'],
+              ['text' => '禁用', 'value' => '０', 'color' => 'danger']
+            ];
+            $form->switch('status', '状态')->states($states)->default(1);
             $form->display('created_at', '创建时间');
             $form->display('updated_at', '编辑时间');
         });
