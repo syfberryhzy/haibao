@@ -6,6 +6,7 @@ use Encore\Admin\Traits\AdminBuilder;
 use Encore\Admin\Traits\ModelTree;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Gallery;
+use App\Models\Paragraph;
 
 class Category extends Model
 {
@@ -23,6 +24,11 @@ class Category extends Model
     public function galleries()
     {
       return $this->hasMany(Gallery::class);
+    }
+
+    public function paragraphs()
+    {
+      return $this->hasMany(Paragraph::class);
     }
 
 }
