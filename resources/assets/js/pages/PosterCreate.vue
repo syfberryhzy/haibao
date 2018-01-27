@@ -20,7 +20,7 @@ export default {
     props: ['lettre'],
     data() {
         return {
-            contract: this.lettre.value
+            contract: this.lettre ? this.lettre.value : ''
         }
     }
 }

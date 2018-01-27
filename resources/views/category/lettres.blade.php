@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-<category-lettres :category="{{ $category} }"></category-lettres>
+<category-lettres :category-lettres="{{ $lettres }}"></category-lettres>
 @endsection

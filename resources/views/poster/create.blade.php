@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<poster-create :lettre="{{ $lettre }}"></poster-create>
+@if (isset($lettre))
+    <poster-create :lettre="{{ $lettre }}"></poster-create>
+@else
+    <poster-create></poster-create>
+@endif
 @endsection

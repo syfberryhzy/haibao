@@ -26,6 +26,12 @@ Route::post('/lettres/{paragraph}', 'LettreController@store')->name('lettre.stor
 
 Route::get('/pictures', 'PictureController@index')->name('picture.index');
 
+Route::get('/pictures/hot', 'PictureController@hot')->name('picture.hot');
+
+Route::get('/pictures/new', 'PictureController@new')->name('picture.new');
+
+Route::get('/categories/{category}/pictures', 'CategoryController@pictures')->name('picture.pictures');
+
 Route::get('/categories/{category}/lettres', 'CategoryController@lettres')->name('category.lettres');
 
 Route::get('/categories/{category}', 'CategoryController@show')->name('category.show');

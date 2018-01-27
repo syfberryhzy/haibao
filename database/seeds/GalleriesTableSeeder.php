@@ -13,7 +13,7 @@ class GalleriesTableSeeder extends Seeder
      */
     public function run()
     {
-        $category_ids = ['2', '3', '4', '5', '6', '7'];
+        $category_ids = ['8', '9', '10', '11', '12', '13'];
         $faker = app(Faker\Generator::class);
 
         $galleries = factory(Gallery::class)->times(50)->make()->each(function ($gallery) use ($faker, $category_ids) {

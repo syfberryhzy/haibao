@@ -24,6 +24,8 @@ Vue.component('user-index', require('./pages/UserIndex.vue'));
 Vue.component('poster-create', require('./pages/PosterCreate.vue'));
 Vue.component('category-lettres', require('./pages/CategoryLettres.vue'));
 Vue.component('lettre-index', require('./pages/LettreIndex.vue'));
+Vue.component('picture-index', require('./pages/PictureIndex.vue'));
+Vue.component('category-pictures', require('./pages/CategoryPictures.vue'));
 Vue.component('search-bar', require('./components/SearchBar.vue'));
 
 const app = new Vue({

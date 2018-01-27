@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class CategoryController extends Controller
 {
@@ -11,8 +12,15 @@ class CategoryController extends Controller
         return view('category.show');
     }
 
-    public function lettres()
+    public function lettres(Request $request, Category $category)
     {
-        return view('category.lettres');
+        $lettres = $category->lettres;
+        return view('category.lettres', compact('lettres'));
+    }
+
+    public function pictures(Request $request, Category $category)
+    {
+        $pictures = $category->galleries;
+        return view('category.pictures', compact('pictures'));
     }
 }

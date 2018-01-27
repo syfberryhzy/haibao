@@ -85,3 +85,25 @@ a.picture-more {
   font-size: 14px;
 }
 
+.gallery {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin: .533rem;
+}
+
+.gallery-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin: 0 7.5px;
+}
+
+.gallery-list img {
+  margin-top: 5px;
+}
+

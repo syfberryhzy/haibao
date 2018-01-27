@@ -22,7 +22,11 @@ class Category extends Model
 
     public function galleries()
     {
-      return $this->hasMany(Gallery::class);
+        return $this->hasMany(Gallery::class, 'category_id');
     }
 
+    public function lettres()
+    {
+        return $this->hasMany(Paragraph::class, 'category_id');
+    }
 }
