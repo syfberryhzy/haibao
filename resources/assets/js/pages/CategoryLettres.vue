@@ -28,7 +28,7 @@ export default {
     },
     methods: {
         change(id) {
-            weui.confirm('确认选用该美文吗', {
+            weui.confirm('确认选用该美文吗?', {
                 title: '操作提示',
                 buttons: [{
                     label: '再看看',

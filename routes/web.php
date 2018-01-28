@@ -24,13 +24,15 @@ Route::get('/lettres', 'LettreController@index')->name('lettre.index');
 
 Route::post('/lettres/{paragraph}', 'LettreController@store')->name('lettre.store');
 
+Route::post('/pictures/{gallery}', 'PictureController@store')->name('picture.store');
+
 Route::get('/pictures', 'PictureController@index')->name('picture.index');
 
 Route::get('/pictures/hot', 'PictureController@hot')->name('picture.hot');
 
 Route::get('/pictures/new', 'PictureController@new')->name('picture.new');
 
-Route::get('/categories/{category}/pictures', 'CategoryController@pictures')->name('picture.pictures');
+Route::get('/categories/{category}/pictures', 'CategoryController@pictures')->name('category.pictures');
 
 Route::get('/categories/{category}/lettres', 'CategoryController@lettres')->name('category.lettres');
 

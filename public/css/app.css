@@ -65,24 +65,33 @@ a.picture-more {
 }
 
 .poster-create-bottom {
-  height: 50vh;
+  height: 46.7vh;
   margin: 0 0.75em;
 }
 
 .poster-create-bottom a.belles-lettres {
-  padding: .267rem 0;
-  width: 100%;
-  display: block;
   text-align: right;
   font-size: 15px;
   color: #1684B2;
+  position: absolute;
+  right: 1.2em;
 }
 
 .poster-create-bottom textarea {
   border: none;
   width: 100%;
-  background: #F5F5F5;
   font-size: 14px;
+}
+
+.poster-create-bottom p {
+  font-size: 14px;
+  text-align: center;
+  margin: 3.3vh 0;
+}
+
+.bg {
+  background-image: url("/images/templete.png");
+  background-size: 100% 100%;
 }
 
 .gallery {

@@ -7,9 +7,18 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
-    public function show()
+    public function show(Category $category)
     {
-        return view('category.show');
+        if ($category->isPictureCategory()) {
+            return redirect()->route('category.pictures', ['category' => $category->id]);
+        }
+
+        if ($category->isHasChildrenCategory()) {
+            $categories = $category->getChildrenCategory();
+            return view('category.show', compact('categories'));
+        }
+
+        return redirect()->route('category.lettres', ['category' => $category->id]);
     }
 
     public function lettres(Request $request, Category $category)
