@@ -67,6 +67,14 @@ export default {
             });
         },
         createImg() {
+            if (this.img === '/images/bg.png') {
+                weui.alert('请先选择美图');
+                return ;
+            }
+            if (this.contract === '') {
+                weui.alert('请先选择美文');
+                return ;
+            }
             html2canvas(document.querySelector("#poster"), {
                 logging: false,
                 useCORS: true,

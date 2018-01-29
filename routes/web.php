@@ -44,4 +44,6 @@ Route::get('/categories/{category}', 'CategoryController@show')->name('category.
 
 Route::any('/wechat', 'WeChatController@serve');
 
+Route::get('/menu', 'WeChatController@menu');
+
 Route::get('/user', 'UserController@index')->name('user.index');
