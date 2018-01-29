@@ -24,12 +24,14 @@ class CategoryController extends Controller
     public function lettres(Request $request, Category $category)
     {
         $lettres = $category->lettres;
-        return view('category.lettres', compact('lettres'));
+        $title = $category->title;
+        return view('category.lettres', compact('lettres', 'title'));
     }
 
     public function pictures(Request $request, Category $category)
     {
         $pictures = $category->galleries;
-        return view('category.pictures', compact('pictures'));
+        $title = $category->title;
+        return view('category.pictures', compact('pictures', 'title'));
     }
 }

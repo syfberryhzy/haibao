@@ -25,13 +25,15 @@ class PictureController extends Controller
     public function hot()
     {
         $pictures = Gallery::latest('click_num')->get();
-        return view('category.pictures', compact('pictures'));
+        $title = '最热图片';
+        return view('category.pictures', compact('pictures', 'title'));
     }
 
     public function new()
     {
         $pictures = Gallery::latest()->get();
-        return view('category.pictures', compact('pictures'));
+        $title = '最新图片';
+        return view('category.pictures', compact('pictures', 'title'));
     }
 
     public function store(Request $request, Gallery $gallery)

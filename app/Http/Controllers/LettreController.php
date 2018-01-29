@@ -21,6 +21,13 @@ class LettreController extends Controller
         return view('lettre.index', compact('lettreCategory', 'hotLettres'));
     }
 
+    public function hot()
+    {
+        $lettres = Paragraph::latest()->get();
+        $title = '最热美文';
+        return view('category.lettres', compact('lettres', 'title'));
+    }
+
     public function store(Request $request, Paragraph $paragraph)
     {
         $user = auth()->user();

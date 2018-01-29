@@ -26,6 +26,8 @@ Route::get('/user/poster/{diy}', 'PosterController@show')->name('poster.show');
 
 Route::get('/lettres', 'LettreController@index')->name('lettre.index');
 
+Route::get('/lettres/hot', 'LettreController@hot')->name('lettre.hot');
+
 Route::post('/lettres/{paragraph}', 'LettreController@store')->name('lettre.store');
 
 Route::post('/pictures/{gallery}', 'PictureController@store')->name('picture.store');

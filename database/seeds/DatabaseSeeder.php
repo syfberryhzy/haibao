@@ -16,6 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CategoriesTableSeeder::class);
         $this->call(GalleriesTableSeeder::class);
         $this->call(ParagraphsTableSeeder::class);
-        factory('App\Models\Diy')->create();
+        factory('App\Models\Template')->create();
     }
 }

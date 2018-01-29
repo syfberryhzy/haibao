@@ -39,10 +39,13 @@ class PosterController extends Controller
         $file_path = request()->file('file')->store('haibao', 'public');
 
         $user = auth()->user();
+        $picture = Cache::get("user." . $user->id . "picture");
+        $lettre = Cache::get("user." . $user->id . "lettre");
+
         $poster = $user->addPoster([
             'template_id' => $request->template_id,
-            'image' => serialize(Cache::get("user." . $user->id . "picture")),
-            'post' => serialize(Cache::get("user." . $user->id . "lettre")),
+            'image' => ($picture && $picture->value === $request->img) ? serialize($picture) : serialize($request->img),
+            'post' => ($lettre && $lettre->value === $request->contract) ? serialize($lettre) : serialize($request->contract),
             'diy_image' => $file_path,
             'status' => 1
         ]);

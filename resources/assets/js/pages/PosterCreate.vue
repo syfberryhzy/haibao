@@ -10,7 +10,7 @@
         <div class="poster-create-bottom">
             <p v-if="this.lettre">&nbsp;{{ this.lettre.author }} | {{ this.lettre.title }}<a class="belles-lettres" href="/lettres" data-html2canvas-ignore="true">美文选择</a></p>
             <p v-else>&nbsp;<a class="belles-lettres" href="/lettres" data-html2canvas-ignore="true">美文选择</a></p>
-            <textarea contenteditable="true" name="" id="" cols="30" rows="8" placeholder="请留下你的声音" v-html="contract"></textarea>
+            <textarea contenteditable="true" name="" id="" cols="30" rows="8" placeholder="请留下你的声音" v-model="contract"></textarea>
             <a href="javascript:;" class="weui-btn weui-btn_primary" data-html2canvas-ignore="true" @click="createImg" v-show="button">生成海报</a>
         </div>
     </div>
@@ -68,8 +68,8 @@ export default {
         },
         createImg() {
             if (this.img === '/images/bg.png') {
-                weui.alert('请先选择美图');
-                return ;
+                // weui.alert('请先选择美图');
+                // return ;
             }
             if (this.contract === '') {
                 weui.alert('请先选择美文');
@@ -99,6 +99,8 @@ export default {
             let that = this;
             data.append('file', image);
             data.append('template_id', this.template.id);
+            data.append('contract', this.contract);
+            data.append('img', this.img);
             axios.post(`/user/poster`, data)
                 .then(response => {
                     if (response.status == 201) {
