@@ -8,6 +8,14 @@ body {
   min-height: calc(100vh - 20px);
 }
 
+.poster-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
 .h-full {
   min-height: 100vh;
 }

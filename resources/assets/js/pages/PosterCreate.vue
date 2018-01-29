@@ -8,7 +8,8 @@
             </div>
         </div>
         <div class="poster-create-bottom">
-            <p>&nbsp;{{ this.lettre.author }} | {{ this.lettre.title }}<a class="belles-lettres" href="/lettres" data-html2canvas-ignore="true">美文选择</a></p>
+            <p v-if="this.lettre">&nbsp;{{ this.lettre.author }} | {{ this.lettre.title }}<a class="belles-lettres" href="/lettres" data-html2canvas-ignore="true">美文选择</a></p>
+            <p v-else>&nbsp;<a class="belles-lettres" href="/lettres" data-html2canvas-ignore="true">美文选择</a></p>
             <textarea contenteditable="true" name="" id="" cols="30" rows="8" placeholder="请留下你的声音" v-html="contract"></textarea>
             <a href="javascript:;" class="weui-btn weui-btn_primary" data-html2canvas-ignore="true" @click="createImg" v-show="button">生成海报</a>
         </div>
@@ -22,7 +23,7 @@ export default {
     data() {
         return {
             contract: this.lettre ? this.lettre.value : '',
-            img: !this.picture ? this.picture.value : '/images/bg.png',
+            img: this.picture ? this.picture.value : '/images/bg.png',
             button: true,
             poster: true,
             styleObject: {
@@ -74,10 +75,34 @@ export default {
             }).then(canvas => {
                 var img = new Image();
                 img.src = canvas.toDataURL();
-                // console.log(img.src);
+                this.persist(img.src)
+                
                 document.querySelector("#app").appendChild(canvas)
             });
-        }
+        },
+        persist(dataurl) {
+            var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+            while(n--){
+                u8arr[n] = bstr.charCodeAt(n);
+            }
+            var image = new Blob([u8arr], {type:mime});
+            var data = new FormData();
+            let that = this;
+            data.append('file', image);
+            data.append('template_id', this.template.id);
+            axios.post(`/user/poster`, data)
+                .then(response => {
+                    if (response.status == 201) {
+                            weui.toast('生成海报成功', {
+                            duration: 2000,
+                            callback: () => {
+                                window.location.href = `/user/poster/${response.data.data.id}`
+                            }
+                        });
+                    }
+                });
+        },
     }
 }
 </script>

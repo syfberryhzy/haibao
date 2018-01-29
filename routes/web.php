@@ -18,7 +18,11 @@ Route::get('/login/openid/{openid}', 'PublicController@login')->name('login');
 
 Route::get('/user/poster/create', 'PosterController@create')->name('poster.create');
 
+Route::post('/user/poster', 'PosterController@store')->name('poster.store');
+
 Route::get('/user/poster', 'PosterController@index')->name('poster.index');
+
+Route::get('/user/poster/{diy}', 'PosterController@show')->name('poster.show');
 
 Route::get('/lettres', 'LettreController@index')->name('lettre.index');
 
