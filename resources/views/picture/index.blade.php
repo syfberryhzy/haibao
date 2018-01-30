@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<<<<<<< HEAD
 <div class="container h-full">
     <div class="weui-grids bg-white">
       @foreach ($pictureCategory as $key => $val)
@@ -75,4 +76,11 @@
         </div>
     </div>
 </div>
+=======
+<picture-index 
+    :picture-category="{{ $pictureCategory }}" 
+    :hot-Pictures="{{ $hotPictures->toJson() }}" 
+    :new-Pictures="{{ $newPictures->toJson() }}">
+</picture-index>
+>>>>>>> 21f67f65d278a35aa1cfa9e86f22b4a53e8ad049
 @endsection

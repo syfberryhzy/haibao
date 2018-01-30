@@ -16,10 +16,21 @@
     "jquery": "^3.2",
     "laravel-mix": "^1.0",
     "lodash": "^4.17.4",
+<<<<<<< HEAD
     "vue": "^2.5.7"
   },
   "dependencies": {
     "amfe-flexible": "^2.2.1",
+=======
+    "vue": "^2.5.7",
+    "vue-lazyload": "^1.1.4"
+  },
+  "dependencies": {
+    "amfe-flexible": "^2.2.1",
+    "html2canvas": "^1.0.0-alpha.9",
+    "vconsole": "^3.1.0",
+    "weixin-js-sdk": "^1.2.0",
+>>>>>>> 21f67f65d278a35aa1cfa9e86f22b4a53e8ad049
     "weui": "^1.1.2",
     "weui.js": "^1.1.3"
   }

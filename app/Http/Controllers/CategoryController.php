@@ -7,15 +7,37 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
-    public function show(Category $category)
+
+    public function __construct()
     {
-        $categoryChildren = $category;
-        // $categoryChildren = Category::where('parent_id', $category['id'])->get();
-        return view('category.show', compact('category', 'categoryChildren'));
+        return $this->middleware('auth');
     }
 
-    public function lettres()
+    public function show(Category $category)
     {
-        return view('category.lettres');
+        if ($category->isPictureCategory()) {
+            return redirect()->route('category.pictures', ['category' => $category->id]);
+        }
+
+        if ($category->isHasChildrenCategory()) {
+            $categories = $category->getChildrenCategory();
+            return view('category.show', compact('categories'));
+        }
+
+        return redirect()->route('category.lettres', ['category' => $category->id]);
+    }
+
+    public function lettres(Request $request, Category $category)
+    {
+        $lettres = $category->lettres;
+        $title = $category->title;
+        return view('category.lettres', compact('lettres', 'title'));
+    }
+
+    public function pictures(Request $request, Category $category)
+    {
+        $pictures = $category->galleries;
+        $title = $category->title;
+        return view('category.pictures', compact('pictures', 'title'));
     }
 }

@@ -7,6 +7,11 @@ use EasyWeChat;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        return $this->middleware('auth');
+    }
+
     public function index(Request $request)
     {
         $user = auth()->user();

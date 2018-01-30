@@ -15,6 +15,16 @@ body {
     width: 100vw;
     min-height: calc(100vh - 20px);
 }
+<<<<<<< HEAD
+=======
+.poster-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+}
+>>>>>>> 21f67f65d278a35aa1cfa9e86f22b4a53e8ad049
 .h-full {
     min-height: 100vh;
 }
@@ -54,6 +64,7 @@ a.picture-more {
 }
 
 .poster-create-bottom {
+<<<<<<< HEAD
     height: 50vh;
     margin: 0 0.75em;
     
@@ -64,12 +75,60 @@ a.picture-more {
         text-align: right;
         font-size: 15px;
         color: #1684B2;
+=======
+    height: 46.7vh;
+    margin: 0 0.75em;
+    
+    a.belles-lettres {
+        text-align: right;
+        font-size: 15px;
+        color: #1684B2;
+        position: absolute;
+        right: 1.2em;
+>>>>>>> 21f67f65d278a35aa1cfa9e86f22b4a53e8ad049
     }
 
     textarea {
         border: none;
         width: 100%;
+<<<<<<< HEAD
         background: #F5F5F5;
         font-size: 14px;
     }
+=======
+        font-size: 14px;
+        background: transparent;
+    }
+
+    p {
+        font-size: 14px;
+        text-align: center;
+        margin: 3.3vh 0;
+    }
+}
+.bg {
+    background-image: url('/images/templete.png');
+    background-size: 100% 100%;
+}
+.gallery {
+    display: flex;
+    justify-content: space-around;
+    margin: .533rem;
+}
+.gallery-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 7.5px;
+
+    img {
+        margin-top: 5px;
+    }
+}
+.poster-show-share {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    top: 53.3vh;
+    right: 20px;
+>>>>>>> 21f67f65d278a35aa1cfa9e86f22b4a53e8ad049
 }

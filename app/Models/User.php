@@ -39,4 +39,17 @@ class User extends Authenticatable
         }
         return $user;
     }
+<<<<<<< HEAD
+=======
+
+    public function poster()
+    {
+        return $this->hasMany(Diy::class, 'user_id');
+    }
+
+    public function addPoster($data)
+    {
+        return $this->poster()->create($data);
+    }
+>>>>>>> 21f67f65d278a35aa1cfa9e86f22b4a53e8ad049
 }
