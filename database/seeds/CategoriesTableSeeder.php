@@ -20,7 +20,8 @@ class CategoriesTableSeeder extends Seeder
             0 => 
             array (
                 'id' => 1,
-                'title' => '图片分类',
+                'title' => '美文分类',
+                'icon' => '',
                 'parent_id' => 0,
                 'order' => 1,
                 'status' => 1,
@@ -30,7 +31,8 @@ class CategoriesTableSeeder extends Seeder
             1 => 
             array (
                 'id' => 2,
-                'title' => '美文分类',
+                'title' => '图片分类',
+                'icon' => '',
                 'parent_id' => 0,
                 'order' => 4,
                 'status' => 1,
@@ -40,7 +42,8 @@ class CategoriesTableSeeder extends Seeder
             2 => 
             array (
                 'id' => 3,
-                'title' => '用户上传',
+                'title' => '歌词歌单',
+                'icon' => '/images/singer.png',
                 'parent_id' => 1,
                 'order' => 2,
                 'status' => 1,
@@ -50,7 +53,8 @@ class CategoriesTableSeeder extends Seeder
             3 => 
             array (
                 'id' => 4,
-                'title' => '文艺',
+                'title' => '影视动漫',
+                'icon' => '/images/comic.png',
                 'parent_id' => 1,
                 'order' => 3,
                 'status' => 1,
@@ -60,7 +64,8 @@ class CategoriesTableSeeder extends Seeder
             4 => 
             array (
                 'id' => 5,
-                'title' => '动物',
+                'title' => '其他美文',
+                'icon' => '/images/other.png',
                 'parent_id' => 1,
                 'order' => 0,
                 'status' => 1,
@@ -70,7 +75,8 @@ class CategoriesTableSeeder extends Seeder
             5 => 
             array (
                 'id' => 6,
-                'title' => '星空',
+                'title' => '文学著作',
+                'icon' => '/images/literature.png',
                 'parent_id' => 1,
                 'order' => 0,
                 'status' => 1,
@@ -80,7 +86,8 @@ class CategoriesTableSeeder extends Seeder
             6 => 
             array (
                 'id' => 7,
-                'title' => '水墨',
+                'title' => '名人名言',
+                'icon' => '/images/motto.png',
                 'parent_id' => 1,
                 'order' => 0,
                 'status' => 1,
@@ -90,7 +97,8 @@ class CategoriesTableSeeder extends Seeder
             7 => 
             array (
                 'id' => 8,
-                'title' => '风景',
+                'title' => '电影台词',
+                'icon' => '/images/movie.png',
                 'parent_id' => 1,
                 'order' => 0,
                 'status' => 1,
@@ -100,8 +108,9 @@ class CategoriesTableSeeder extends Seeder
             8 => 
             array (
                 'id' => 9,
-                'title' => '卡通',
-                'parent_id' => 1,
+                'title' => '风景',
+                'icon' => '/images/scenery.png',
+                'parent_id' => 2,
                 'order' => 0,
                 'status' => 1,
                 'created_at' => '2018-01-10 14:54:23',
@@ -110,8 +119,9 @@ class CategoriesTableSeeder extends Seeder
             9 => 
             array (
                 'id' => 10,
-                'title' => '插画',
-                'parent_id' => 1,
+                'title' => '动物',
+                'icon' => '/images/animal.png',
+                'parent_id' => 2,
                 'order' => 0,
                 'status' => 1,
                 'created_at' => '2018-01-10 14:55:01',
@@ -120,8 +130,9 @@ class CategoriesTableSeeder extends Seeder
             10 => 
             array (
                 'id' => 11,
-                'title' => '明星',
-                'parent_id' => 1,
+                'title' => '星空',
+                'icon' => '/images/sky.png',
+                'parent_id' => 2,
                 'order' => 0,
                 'status' => 1,
                 'created_at' => '2018-01-10 14:55:21',
@@ -130,7 +141,8 @@ class CategoriesTableSeeder extends Seeder
             11 => 
             array (
                 'id' => 12,
-                'title' => '歌词',
+                'title' => '浪漫',
+                'icon' => '/images/romantic.png',
                 'parent_id' => 2,
                 'order' => 0,
                 'status' => 1,
@@ -140,7 +152,8 @@ class CategoriesTableSeeder extends Seeder
             12 => 
             array (
                 'id' => 13,
-                'title' => '电影台词',
+                'title' => '艺术',
+                'icon' => '/images/art.png',
                 'parent_id' => 2,
                 'order' => 0,
                 'status' => 1,
@@ -150,65 +163,14 @@ class CategoriesTableSeeder extends Seeder
             13 => 
             array (
                 'id' => 14,
-                'title' => '名人名言',
+                'title' => '植物',
+                'icon' => '/images/botany.png',
                 'parent_id' => 2,
                 'order' => 0,
                 'status' => 1,
                 'created_at' => '2018-01-10 15:13:35',
                 'updated_at' => '2018-01-10 15:13:35',
-            ),
-            14 => 
-            array (
-                'id' => 15,
-                'title' => '搞笑段子',
-                'parent_id' => 2,
-                'order' => 0,
-                'status' => 1,
-                'created_at' => '2018-01-10 15:14:04',
-                'updated_at' => '2018-01-10 15:14:04',
-            ),
-            15 => 
-            array (
-                'id' => 16,
-                'title' => '小清新',
-                'parent_id' => 2,
-                'order' => 0,
-                'status' => 1,
-                'created_at' => '2018-01-10 15:14:42',
-                'updated_at' => '2018-01-10 15:14:42',
-            ),
-            16 => 
-            array (
-                'id' => 17,
-                'title' => '名著美文',
-                'parent_id' => 2,
-                'order' => 0,
-                'status' => 1,
-                'created_at' => '2018-01-10 15:15:08',
-                'updated_at' => '2018-01-10 15:15:08',
-            ),
-            17 => 
-            array (
-                'id' => 18,
-                'title' => '小说精选',
-                'parent_id' => 2,
-                'order' => 0,
-                'status' => 1,
-                'created_at' => '2018-01-10 15:15:34',
-                'updated_at' => '2018-01-10 15:15:34',
-            ),
-            18 => 
-            array (
-                'id' => 19,
-                'title' => '二次元',
-                'parent_id' => 2,
-                'order' => 0,
-                'status' => 1,
-                'created_at' => '2018-01-10 15:15:54',
-                'updated_at' => '2018-01-10 15:15:54',
-            ),
+            )
         ));
-        
-        
     }
 }

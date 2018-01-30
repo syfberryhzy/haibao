@@ -74,12 +74,12 @@ class UserController extends Controller
         return Admin::grid(User::class, function (Grid $grid) {
 
             $grid->id('ID')->sortable();
+            $grid->avatar('头像')->image('', 50, 50);
             $grid->name('用户名');
-            $grid->avatar('头像')->image();
             $grid->gender('性别')->display(function ($sex) {
-              $sex = $sex == 1 ? "boy.png" : "girl.png";
-              $url = config('app.url')."/images/". $sex;
-              return '<img src="'. $url. '" style="width:50px;height:50px;">';
+                $sex = $sex == 1 ? "boy.png" : "girl.png";
+                $url = config('app.url')."/images/". $sex;
+                return '<img src="'. $url. '" style="width:50px;height:50px;">';
             });
             $grid->openid('标识');
             $grid->status('状态');
@@ -90,13 +90,13 @@ class UserController extends Controller
             $grid->disableRowSelector();
             $grid->disableExport();
             $grid->filter(function ($filter) {
-              // 去掉默认的id过滤器
-              $filter->disableIdFilter();
+                // 去掉默认的id过滤器
+                $filter->disableIdFilter();
 
-              // 在这里添加字段过滤器
-              $filter->like('name', '用户名');
-              $filter->like('openid', '标识');
-              // $filter->like('name', 'name');
+                // 在这里添加字段过滤器
+                $filter->like('name', '用户名');
+                $filter->like('openid', '标识');
+                // $filter->like('name', 'name');
             });
         });
     }

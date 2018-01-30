@@ -16,9 +16,10 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title')->comment('分类名称')->unique();
-            $table->Integer('parent_id')->comment('父级id')->default(0);
-            $table->Integer('order')->default(0)->comment('排序 默认为0');
-            $table->Tinyinteger('status')->comment('状态 默认可用 1=可用，0=禁用')->default('1');
+            $table->string('icon')->nullable()->comment('icon');
+            $table->integer('parent_id')->comment('父级id')->default(0);
+            $table->integer('order')->default(0)->comment('排序 默认为0');
+            $table->tinyInteger('status')->comment('状态 默认可用 1=可用，0=禁用')->default('1');
             $table->timestamps();
         });
     }

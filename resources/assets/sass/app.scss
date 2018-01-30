@@ -1,9 +1,75 @@
 
 // Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+// @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 
 // Variables
 @import "variables";
 
 // Bootstrap
-@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+// @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+body {
+    background: $body-bg;
+}
+.container {
+    background: $body-bg;
+    width: 100vw;
+    min-height: calc(100vh - 20px);
+}
+.h-full {
+    min-height: 100vh;
+}
+.bg-white {
+    background: #FFF;
+}
+.poster-create-top {
+    height: 50vh;
+
+    .change-upload {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 50vh;
+        width: 100%;
+
+        img {
+            width: 1.6rem;
+            height: 1.24rem;
+        }
+        p {
+            color: #E1E5EB;
+            font-size: 14px;
+        }
+    }
+}
+.weui-panel__hd {
+    display: flex;
+    justify-content: space-between;
+}
+a.picture-more {
+    color: #1684B2;
+}
+
+.poster-create-bottom {
+    height: 50vh;
+    margin: 0 0.75em;
+    
+    a.belles-lettres {
+        padding: .267rem 0;
+        width: 100%;
+        display: block;
+        text-align: right;
+        font-size: 15px;
+        color: #1684B2;
+    }
+
+    textarea {
+        border: none;
+        width: 100%;
+        background: #F5F5F5;
+        font-size: 14px;
+    }
+}
