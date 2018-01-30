@@ -7,7 +7,7 @@
                     class="weui-media-box weui-media-box_appmsg"
                     @click="detail(poster.id)">
                     <div class="weui-media-box__hd">
-                        <img class="weui-media-box__thumb" :src="typeof poster.image === 'string' ? poster.image : poster.image.value" alt="">
+                        <img class="weui-media-box__thumb" v-lazy="typeof poster.image === 'string' ? poster.image : poster.image.value" alt="">
                     </div>
                     <div class="weui-media-box__bd">
                         <h4 class="weui-media-box__title" style="line-height: 2.3;" v-if="typeof poster.post !== 'string'">{{ poster.post.author }} 《{{ poster.post.title }}》</h4>

@@ -76,6 +76,7 @@ a.picture-more {
         border: none;
         width: 100%;
         font-size: 14px;
+        background: transparent;
     }
 
     p {
@@ -101,4 +102,11 @@ a.picture-more {
     img {
         margin-top: 5px;
     }
+}
+.poster-show-share {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    top: 53.3vh;
+    right: 20px;
 }

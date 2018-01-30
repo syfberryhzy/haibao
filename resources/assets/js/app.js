@@ -12,6 +12,29 @@ window.Vue = require('vue');
 require('amfe-flexible');
 require('weui');
 
+import VueLazyLoad from 'vue-lazyload'
+Vue.use(VueLazyLoad,{
+    error:'./static/error.png',
+    loading:'/images/loading.gif'
+})
+
+window.wx = require('weixin-js-sdk');
+
+wx.config(JSON.parse(App.wxconfig));
+wx.ready(function(){
+    wx.onMenuShareTimeline({
+        title: '海报制作',  
+        link: 'http://haibao.mandokg.com/guest',
+        imgUrl: 'http://lorempixel.com/200/200/?47750',
+    });
+    wx.onMenuShareAppMessage({
+        title: '海报制作',
+        desc: '海报制作',
+        link: 'http://haibao.mandokg.com/guest',
+        imgUrl: 'http://lorempixel.com/200/200/?47750',
+    });
+});
+
 window.weui = require('weui.js');
 
 /**
@@ -20,6 +43,7 @@ window.weui = require('weui.js');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+Vue.component('guest', require('./pages/Guest.vue'));
 Vue.component('user-index', require('./pages/UserIndex.vue'));
 Vue.component('poster-create', require('./pages/PosterCreate.vue'));
 Vue.component('poster-index', require('./pages/PosterIndex.vue'));

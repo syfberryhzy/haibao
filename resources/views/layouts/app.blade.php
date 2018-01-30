@@ -13,7 +13,7 @@
         window.App = <?php echo json_encode([
             'user' => Auth::user(),
             'signedIn' => Auth::check(),
-            'wxconfig' => config('app.debug') ? '' : $js->config(array(
+            'wxconfig' => app('wechat.official_account')->jssdk->buildConfig(array(
                'onMenuShareTimeline',
                'onMenuShareAppMessage',
                'onMenuShareQQ',

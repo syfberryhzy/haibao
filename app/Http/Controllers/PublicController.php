@@ -19,4 +19,9 @@ class PublicController extends Controller
 
         return redirect()->route('user.index');
     }
+
+    public function guest()
+    {
+        return view('guest');
+    }
 }

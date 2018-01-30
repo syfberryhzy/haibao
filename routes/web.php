@@ -14,7 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/login/openid/{openid}', 'PublicController@login')->name('login');
+Route::get('/guest', 'PublicController@guest')->name('login');
+
+Route::get('/login/openid/{openid}', 'PublicController@login')->name('openid');
 
 Route::get('/user/poster/create', 'PosterController@create')->name('poster.create');
 

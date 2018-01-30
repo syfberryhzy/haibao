@@ -7,6 +7,11 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        return $this->middleware('auth');
+    }
+
     public function show(Category $category)
     {
         if ($category->isPictureCategory()) {

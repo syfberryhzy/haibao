@@ -16,11 +16,13 @@
     "jquery": "^3.2",
     "laravel-mix": "^1.0",
     "lodash": "^4.17.4",
-    "vue": "^2.5.7"
+    "vue": "^2.5.7",
+    "vue-lazyload": "^1.1.4"
   },
   "dependencies": {
     "amfe-flexible": "^2.2.1",
     "html2canvas": "^1.0.0-alpha.9",
+    "weixin-js-sdk": "^1.2.0",
     "weui": "^1.1.2",
     "weui.js": "^1.1.3"
   }

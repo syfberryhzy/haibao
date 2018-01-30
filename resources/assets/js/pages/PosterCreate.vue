@@ -10,7 +10,7 @@
         <div class="poster-create-bottom">
             <p v-if="this.lettre">&nbsp;{{ this.lettre.author }} | {{ this.lettre.title }}<a class="belles-lettres" href="/lettres" data-html2canvas-ignore="true">美文选择</a></p>
             <p v-else>&nbsp;<a class="belles-lettres" href="/lettres" data-html2canvas-ignore="true">美文选择</a></p>
-            <textarea contenteditable="true" name="" id="" cols="30" rows="8" placeholder="请留下你的声音" v-model="contract"></textarea>
+            <textarea contenteditable="true" name="" id="" cols="30" rows="6" placeholder="请留下你的声音" v-model="contract"></textarea>
             <a href="javascript:;" class="weui-btn weui-btn_primary" data-html2canvas-ignore="true" @click="createImg" v-show="button">生成海报</a>
         </div>
     </div>
@@ -36,14 +36,16 @@ export default {
         changePicture() {
             weui.actionSheet([
                 {
-                    label: '拍照',
+                    label: '自己上传',
                     onClick: function () {
-                        console.log('拍照');
-                    }
-                }, {
-                    label: '从相册选择',
-                    onClick: function () {
-                        console.log('从相册选择');
+                        wx.chooseImage({
+                            count: 1, // 默认9
+                            sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                            sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                            success: function (res) {
+                                var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                            }
+                        });
                     }
                 }, {
                     label: '从美图选择',
@@ -68,8 +70,8 @@ export default {
         },
         createImg() {
             if (this.img === '/images/bg.png') {
-                // weui.alert('请先选择美图');
-                // return ;
+                weui.alert('请先选择美图');
+                return ;
             }
             if (this.contract === '') {
                 weui.alert('请先选择美文');
