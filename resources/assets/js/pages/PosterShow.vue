@@ -1,7 +1,7 @@
 <template>
     <div class="container h-full">
         <div class="weui-panel weui-panel_access poster-img">
-            <img class="poster-img" v-lazy="'/storage/' + poster.diy_image" alt="">
+            <img class="poster-img" v-lazy="'/uploads/' + poster.diy_image" alt="">
         </div>
         <img src="/images/share.png" class="poster-show-share" @click="share">
     </div>

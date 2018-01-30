@@ -36,7 +36,7 @@ class PosterController extends Controller
 
     public function store(PosterRequest $request)
     {
-        $file_path = request()->file('file')->store('haibao', 'public');
+        $file_path = request()->file('file')->store('haibao', 'admin');
 
         $user = auth()->user();
         $picture = Cache::get("user." . $user->id . "picture");

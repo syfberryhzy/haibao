@@ -51,3 +51,5 @@ Route::any('/wechat', 'WeChatController@serve');
 Route::get('/menu', 'WeChatController@menu');
 
 Route::get('/user', 'UserController@index')->name('user.index');
+
+Route::post('/upload', 'PublicController@upload')->name('upload');

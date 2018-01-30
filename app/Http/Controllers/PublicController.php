@@ -20,8 +20,19 @@ class PublicController extends Controller
         return redirect()->route('user.index');
     }
 
+    /**
+     * 游客
+     */
     public function guest()
     {
         return view('guest');
+    }
+
+    /**
+     * 上传文件
+     */
+    public function upload()
+    {
+        return request()->file('file')->store('haibao', 'admin');
     }
 }

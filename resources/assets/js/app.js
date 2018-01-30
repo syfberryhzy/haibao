@@ -12,11 +12,14 @@ window.Vue = require('vue');
 require('amfe-flexible');
 require('weui');
 
-import VueLazyLoad from 'vue-lazyload'
+window.VueLazyLoad = require('vue-lazyload');
 Vue.use(VueLazyLoad,{
     error:'./static/error.png',
     loading:'/images/loading.gif'
 })
+
+let VConsole = require('vconsole');
+let vConsole = new VConsole();
 
 window.wx = require('weixin-js-sdk');
 

@@ -43,7 +43,31 @@ export default {
                             sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
                             sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
                             success: function (res) {
-                                var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                                var localId = res.localIds[0];
+                                console.info('localId: ', localId);
+                                wx.getLocalImgData({
+                                    localId: localId, // 图片的localID
+                                    success: function (res) {
+                                        var dataurl = res.localData; // localData是图片的base64数据，可以用img标签显示
+                                        console.info('dataurl: ', dataurl);
+                                        var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+                                        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+                                        while(n--){
+                                            u8arr[n] = bstr.charCodeAt(n);
+                                        }
+                                        var image = new Blob([u8arr], {type:mime});
+                                        var data = new FormData();
+                                        let that = this;
+                                        data.append('file', image);
+                                        axios.post(`/upload`, data)
+                                            .then(response => {
+                                                console.info('response: ', response);
+                                                if (response.status == 201) {
+                                                    this.img = response.data;
+                                                }
+                                            });
+                                    }
+                                });
                             }
                         });
                     }
