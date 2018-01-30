@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\PosterRequest;
 use Illuminate\Support\Facades\Cache;
 use App\Models\Template;
-use App\Http\Requests\PosterRequest;
 use App\Models\Diy;
 
 class PosterController extends Controller
@@ -20,7 +20,7 @@ class PosterController extends Controller
         $user = auth()->user();
         $lettre = Cache::get("user." . $user->id . "lettre");
         $picture = Cache::get("user." . $user->id . "picture");
-        
+
         $template = Template::where('status', 1)->first();
         return view('poster.create', compact('lettre', 'picture', 'template'));
     }
@@ -51,7 +51,7 @@ class PosterController extends Controller
         ]);
         Cache::forget("user." . $user->id . "picture");
         Cache::forget("user." . $user->id . "lettre");
-        
+
         return response(['data' => $poster], 201);
     }
 

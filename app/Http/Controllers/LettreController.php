@@ -16,7 +16,7 @@ class LettreController extends Controller
 
     public function index()
     {
-        $lettreCategory = Category::where('parent_id', 1)->get();
+        $lettreCategory = Category::where('parent_id', Category::MEIWEN_PID)->get();
         $hotLettres = Paragraph::latest()->paginate(5);
         return view('lettre.index', compact('lettreCategory', 'hotLettres'));
     }
@@ -32,7 +32,6 @@ class LettreController extends Controller
     {
         $user = auth()->user();
         Cache::forever("user." . $user->id . "lettre", $paragraph);
-        
         return response(['data' => '选择美文成功'], 201);
     }
 }

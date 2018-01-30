@@ -1,7 +1,7 @@
 <template>
     <div class="container h-full bg" id="poster" v-show="poster" :style="styleObject">
         <div class="poster-create-top">
-            <img src="/images/upload.png" width="100%" height="100%" id="img-top">
+            <img :src="img" width="100%" height="100%" id="img-top">
             <div class="change-upload" @click="changePicture" data-html2canvas-ignore="true">
                 <img src="/images/upload.png" alt="">
                 <p>点击修改图片</p>

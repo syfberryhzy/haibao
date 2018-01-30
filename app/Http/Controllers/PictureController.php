@@ -16,7 +16,7 @@ class PictureController extends Controller
 
     public function index()
     {
-        $pictureCategory = Category::where('parent_id', 2)->get();
+        $pictureCategory = Category::where('parent_id', Category::TUPIAN_PID)->get();
         $hotPictures = Gallery::latest('click_num')->paginate(3);
         $newPictures = Gallery::latest()->paginate(3);
         return view('picture.index', compact('pictureCategory', 'hotPictures', 'newPictures'));
@@ -40,7 +40,6 @@ class PictureController extends Controller
     {
         $user = auth()->user();
         Cache::forever("user." . $user->id . "picture", $gallery);
-        
         return response(['data' => '选择美图成功'], 201);
     }
 }

@@ -28,7 +28,14 @@ class CategoryController extends Controller
 
             $content->header('分类管理');
             $content->description('所有分类都在这里哦～');
-            $content->body(Category::tree());
+            $content->body(Category::tree(function ($tree) {
+                $tree->branch(function ($branch) {
+                    $src = config('admin.upload.host') . '/' . $branch['icon'] ;
+                    $logo = "<img src='$src' style='max-width:30px;max-height:30px' class='img'/>";
+
+                    return "{$branch['id']} - $logo - {$branch['title']}";
+                });
+            }));
         });
     }
 
@@ -92,6 +99,7 @@ class CategoryController extends Controller
 
             $form->display('id', 'ID');
             $form->text('title', '标题')->rules('required|min:2');
+            $form->image('icon', '图标')->rules('required');
             $form->select('parent_id', '父级')->options(Category::where('parent_id', 0)->get()->pluck('title', 'id'))->default(1);
             $form->number('order', '排序')->default(0);
             $states = [

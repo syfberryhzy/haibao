@@ -75,7 +75,7 @@ class GalleryController extends Controller
         return Admin::grid(Gallery::class, function (Grid $grid) {
 
             $grid->id('ID')->sortable();
-            $grid->category_id('分类编号');
+            $grid->column('category.title', '分类名称')->badge('green');
             $grid->title('名称');
             // $grid->value('图片')->image();
             $grid->value('图片')->display(function ($img) {

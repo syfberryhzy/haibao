@@ -73,9 +73,11 @@ class ParagraphController extends Controller
         return Admin::grid(Paragraph::class, function (Grid $grid) {
 
             $grid->id('ID')->sortable();
-            $grid->category_id('分类编号');
-            $grid->title('来源（作品名）');
-            $grid->author('作者');
+            $grid->column('category.title', '分类名称')->badge('green');
+            $grid->title('来源（作品名）')->display(function($title) {
+              return '<strong><i>'. $title .'</i></strong>';
+            });
+            $grid->author('作者')->badge('blue');
             $grid->value('内容')->display(function ($str) {
               return '<div style="width:300px;height:130px;">'. $str .'</div>';
             });

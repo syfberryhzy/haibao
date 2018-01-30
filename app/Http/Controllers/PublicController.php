@@ -20,6 +20,7 @@ class PublicController extends Controller
         return redirect()->route('user.index');
     }
 
+
     /**
      * 游客
      */
