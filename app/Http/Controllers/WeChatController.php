@@ -24,7 +24,7 @@ class WeChatController extends Controller
                 $items = [
                     new NewsItem([
                         'title' => '海报制作',
-                        'url' => route('login', ['openid' => $message['FromUserName']])
+                        'url' => route('openid', ['openid' => $message['FromUserName']])
                     ])
                 ];
                 return new News($items);

@@ -1,7 +1,7 @@
 <template>
     <div class="container h-full bg" id="poster" v-show="poster" :style="styleObject">
         <div class="poster-create-top">
-            <img :src="img" width="100%" height="100%">
+            <img src="/images/upload.png" width="100%" height="100%" id="img-top">
             <div class="change-upload" @click="changePicture" data-html2canvas-ignore="true">
                 <img src="/images/upload.png" alt="">
                 <p>点击修改图片</p>
@@ -34,7 +34,6 @@ export default {
     },
     methods: {
         changePicture() {
-            let that = this;
             weui.actionSheet([
                 {
                     label: '自己上传',
@@ -64,7 +63,8 @@ export default {
                                             .then(response => {
                                                 console.info('response: ', response);
                                                 if (response.status == 201) {
-                                                    that.img = response.data;
+                                                    let img = response.data;
+                                                   $('#img-top').attr('src', img);
                                                 }
                                             });
                                     }
@@ -94,6 +94,7 @@ export default {
             });
         },
         createImg() {
+            this.img = $('#img-top').attr('src');
             if (this.img === '/images/bg.png') {
                 weui.alert('请先选择美图');
                 return ;

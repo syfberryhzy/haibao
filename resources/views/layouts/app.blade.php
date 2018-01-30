@@ -19,6 +19,9 @@
                'onMenuShareQQ',
                'onMenuShareWeibo',
                'onMenuShareQZone',
+               'uploadImage',
+               'chooseImage',
+               'getLocalImgData'
             ), false)
         ]); ?>
     </script>
