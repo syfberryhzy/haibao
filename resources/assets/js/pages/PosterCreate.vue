@@ -34,6 +34,7 @@ export default {
     },
     methods: {
         changePicture() {
+            let that = this;
             weui.actionSheet([
                 {
                     label: '自己上传',
@@ -63,7 +64,7 @@ export default {
                                             .then(response => {
                                                 console.info('response: ', response);
                                                 if (response.status == 201) {
-                                                    this.img = response.data;
+                                                    that.img = response.data;
                                                 }
                                             });
                                     }

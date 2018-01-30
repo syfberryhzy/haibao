@@ -33,6 +33,6 @@ class PublicController extends Controller
      */
     public function upload()
     {
-        return request()->file('file')->store('haibao', 'admin');
+        return response('/uploads/' . request()->file('file')->store('haibao', 'admin'), 201);
     }
 }
