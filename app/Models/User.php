@@ -39,8 +39,6 @@ class User extends Authenticatable
         }
         return $user;
     }
-<<<<<<< HEAD
-=======
 
     public function poster()
     {
@@ -51,5 +49,4 @@ class User extends Authenticatable
     {
         return $this->poster()->create($data);
     }
->>>>>>> 21f67f65d278a35aa1cfa9e86f22b4a53e8ad049
 }

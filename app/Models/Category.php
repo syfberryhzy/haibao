@@ -12,13 +12,8 @@ class Category extends Model
 {
     use ModelTree, AdminBuilder;
 
-<<<<<<< HEAD
     const MEIWEN_PID = 1;
     const TUPIAN_PID = 2;
-=======
-    const TUPIAN_PID = 2;
-    const MEIWEN_PID = 1;
->>>>>>> 21f67f65d278a35aa1cfa9e86f22b4a53e8ad049
     const TUPIAN_BY_USER_ID = 3;//用户上传id
 
     public function __construct(array $attributes = [])
@@ -31,13 +26,11 @@ class Category extends Model
         return $this->hasMany(Gallery::class, 'category_id');
     }
 
-<<<<<<< HEAD
     public function paragraphs()
     {
       return $this->hasMany(Paragraph::class);
     }
 
-=======
     public function lettres()
     {
         return $this->hasMany(Paragraph::class, 'category_id');
@@ -79,5 +72,4 @@ class Category extends Model
     {
         return $this->parent_id === self::TUPIAN_PID;
     }
->>>>>>> 21f67f65d278a35aa1cfa9e86f22b4a53e8ad049
 }
