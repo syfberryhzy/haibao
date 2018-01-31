@@ -19,6 +19,7 @@
         </div>
         <div class="canvas" v-show="!poster">
             <img src="/images/share.png" class="poster-show-share" @click="share">
+            <img v-if="posterImg" :src="posterImg" class="poster-img" alt="">
         </div>
     </div>
 </template>
@@ -33,10 +34,7 @@ export default {
             contract: '',
             title: '',
             poster: true,
-            styleObject: {
-                // backgroundImage: `url('${this.template.body_image}')`,
-                backgroundSize: `100% 100%`
-            }
+            posterImg: '',
         }
     },
     created() {
@@ -167,7 +165,8 @@ export default {
                 loading.hide(function() {
                     console.log('`loading` has been hidden');
                 });
-                document.querySelector(".canvas").appendChild(canvas)
+                this.posterImg = img.src;
+                // document.querySelector(".canvas").appendChild(canvas)
             });
         },
     }
