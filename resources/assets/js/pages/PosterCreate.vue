@@ -12,7 +12,7 @@
             </div>
             <div class="poster-create-bottom">
                 <p v-if="title">&nbsp;{{ title }}<a class="belles-lettres" href="javascript:;" @click="changeLettre" data-html2canvas-ignore="true"><img src="/images/edit.png" alt=""></a></p>
-                <p v-else>&nbsp;<a class="belles-lettres" href="/lettres" @click="changeLettre" data-html2canvas-ignore="true"><img src="/images/edit.png" alt=""></a></p>
+                <p v-else>&nbsp;<a class="belles-lettres" href="javascript:;" @click="changeLettre" data-html2canvas-ignore="true"><img src="/images/edit.png" alt=""></a></p>
                 <textarea contenteditable="true" name="" id="" cols="30" rows="8" placeholder="请留下你的声音" v-model="contract" @change="changContract"></textarea>
                 <a href="javascript:;" class="weui-btn weui-btn_primary" data-html2canvas-ignore="true" @click="createImg">生成海报</a>
             </div>
@@ -44,13 +44,13 @@ export default {
             picture = Cookies.getJSON('picture');
         if (typeof picture === 'object') {
             this.img = picture.value;
-        } else {
+        } else if (typeof picture === 'string') {
             this.img = picture;
         }
         if (typeof lettre === 'object') {
             this.contract = lettre.value;
             this.title = `${lettre.author} | ${lettre.title}`
-        } else {
+        } else if (typeof picture === 'string') {
             this.contract = lettre;
         }
         
