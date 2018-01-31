@@ -16,7 +16,7 @@ class CreateGalleriesTable extends Migration
         Schema::create('galleries', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title')->comment('图片名');
-            $table->string('description')->comment('简述');
+            $table->string('description')->comment('简述')->nullable();
             $table->unsignedInteger('category_id');
             $table->string('value')->comment('图片');
             $table->Integer('click_num')->default(0)->comment('点击数');

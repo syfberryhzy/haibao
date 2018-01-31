@@ -75,7 +75,7 @@ class DiyController extends Controller
     protected function grid()
     {
         return Admin::grid(Diy::class, function (Grid $grid) {
-
+            $grid->model()->orderby('id', 'desc');
             $grid->id('ID')->sortable();
             $grid->member_id('用户');
             $grid->template_id('模板ID');

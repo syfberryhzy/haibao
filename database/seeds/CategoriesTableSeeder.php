@@ -170,7 +170,86 @@ class CategoriesTableSeeder extends Seeder
                 'status' => 1,
                 'created_at' => '2018-01-10 15:13:35',
                 'updated_at' => '2018-01-10 15:13:35',
-            )
+            ),
+            14 => 
+            array (
+                'id' => 15,
+                'title' => '经典',
+                'icon' => 'images/fe5558eb36421532cfa34cc3fd4f2913.png',
+                'parent_id' => 3,
+                'order' => 0,
+                'status' => 1,
+                'created_at' => '2018-01-31 11:35:15',
+                'updated_at' => '2018-01-31 11:35:15',
+            ),
+            15 => 
+            array (
+                'id' => 16,
+                'title' => '网络',
+                'icon' => 'images/8210f7ee26fdfc06f70a1066ef647251.png',
+                'parent_id' => 3,
+                'order' => 0,
+                'status' => 1,
+                'created_at' => '2018-01-31 11:35:47',
+                'updated_at' => '2018-01-31 11:35:47',
+            ),
+            16 => 
+            array (
+                'id' => 17,
+                'title' => '古风',
+                'icon' => 'images/6788a8bd813b07abc36aa124e919bc15.png',
+                'parent_id' => 3,
+                'order' => 0,
+                'status' => 1,
+                'created_at' => '2018-01-31 11:36:32',
+                'updated_at' => '2018-01-31 11:36:32',
+            ),
+            17 => 
+            array (
+                'id' => 18,
+                'title' => '周杰伦',
+                'icon' => 'images/ba14aa1216fc354d83ae5bcc22ca57aa.png',
+                'parent_id' => 3,
+                'order' => 0,
+                'status' => 1,
+                'created_at' => '2018-01-31 11:38:17',
+                'updated_at' => '2018-01-31 11:38:17',
+            ),
+            18 => 
+            array (
+                'id' => 19,
+                'title' => '王力宏',
+                'icon' => 'images/350dc4064ed638203ea699dc92c0f538.png',
+                'parent_id' => 3,
+                'order' => 0,
+                'status' => 1,
+                'created_at' => '2018-01-31 11:38:46',
+                'updated_at' => '2018-01-31 11:38:46',
+            ),
+            19 => 
+            array (
+                'id' => 20,
+                'title' => '《芳华》',
+                'icon' => 'images/f4e3b48cbd415472792ae6b34252f008.png',
+                'parent_id' => 3,
+                'order' => 0,
+                'status' => 1,
+                'created_at' => '2018-01-31 11:39:52',
+                'updated_at' => '2018-01-31 11:39:52',
+            ),
+            20 => 
+            array (
+                'id' => 21,
+                'title' => '《无问西东》',
+                'icon' => 'images/6307f1ca7334e68891d7fabcb806749b.png',
+                'parent_id' => 3,
+                'order' => 0,
+                'status' => 1,
+                'created_at' => '2018-01-31 11:40:34',
+                'updated_at' => '2018-01-31 11:40:34',
+            ),
         ));
+        
+        
     }
 }
