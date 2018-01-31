@@ -71,12 +71,12 @@ class ParagraphController extends Controller
     protected function grid()
     {
         return Admin::grid(Paragraph::class, function (Grid $grid) {
-
+            $grid->model()->orderby('id', 'desc');
             $grid->id('ID')->sortable();
             $grid->column('category.title', '分类名称')->badge('green');
             $grid->title('来源（作品名）')->display(function($title) {
               return '<strong><i>'. $title .'</i></strong>';
-            });
+            })->badge('yellow');
             $grid->author('作者')->badge('blue');
             $grid->value('内容')->display(function ($str) {
               return '<div style="width:300px;height:130px;">'. $str .'</div>';
@@ -90,7 +90,20 @@ class ParagraphController extends Controller
             ];
             $grid->status('状态')->switch($states);
             $grid->created_at('创建时间');
-            // $grid->updated_at('编辑时间');
+            $grid->disableExport();
+            $grid->filter(function ($filter) {
+              $filter->disableIdFilter();
+              $filter->where(function($query) {
+                $query->where('title', 'like', "%{$this->input}%")
+                ->orWhere('author', 'like', "%{$this->input}%")
+                ->orWhere('value', 'like', "%{$this->input}%");
+              }, '来源（作品名）或作者或内容');
+              $filter->where(function ($query) {
+                  $query->whereHas('category', function ($query) {
+                      $query->where('title', 'like', "%{$this->input}%");
+                  });
+              }, '分类名称')->select(Category::buildSelectOptions($nodes = [], $parentId = Category::MEIWEN_PID, $prefix = ''));
+            });
         });
     }
 
@@ -104,7 +117,8 @@ class ParagraphController extends Controller
         return Admin::form(Paragraph::class, function (Form $form) {
 
             $form->display('id', 'ID');
-            $form->select('category_id', '分类')->options(Category::where('parent_id', Category::MEIWEN_PID)->get()->pluck('title', 'id'));
+            // $form->select('category_id', '分类')->options(Category::where('parent_id', Category::MEIWEN_PID)->selectOptions());
+            $form->select('category_id', '分类')->options(Category::buildSelectOptions($nodes = [], $parentId = Category::MEIWEN_PID, $prefix = ''));
             $form->text('title', '作品名');
             $form->text('author', '作者');
             $form->textarea('value', '内容');

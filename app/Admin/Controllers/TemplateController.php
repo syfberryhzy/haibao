@@ -10,6 +10,8 @@ use Encore\Admin\Facades\Admin;
 use Encore\Admin\Layout\Content;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\ModelForm;
+use App\Admin\Extensions\CheckRow;
+use Illuminate\Http\Request;
 
 class TemplateController extends Controller
 {
@@ -72,20 +74,43 @@ class TemplateController extends Controller
     protected function grid()
     {
         return Admin::grid(Template::class, function (Grid $grid) {
-
+            $grid->model()->orderby('id', 'desc');
             $grid->id('ID')->sortable();
             $grid->body_image('背景图片')->image();
-            $grid->left('左边距');
-            $grid->right('右边距');
-            $grid->top('上边距');
-            $grid->bottom('下边距');
-            $grid->color('文本颜色');
-            $grid->status('状态');
+            $grid->status('状态')->display(function($status) {
+              $text =  $status == 1 ? '开启' : '关闭';
+              $color =  $status == 1 ? 'bg-blue' : 'bg-yellow';
+              return '<span class="badge '. $color .'">'. $text .'</span>';
+            });
             $grid->created_at('创建时间');
             $grid->updated_at('编辑时间');
+            $grid->actions(function ($actions) {
+                // 添加操作
+                $status = Template::find($actions->getKey())->status;
+                if ($status == 0) {
+                  $actions->append(new CheckRow($actions->getKey(), config('app.url')."/admin/template"));
+                }
+            });
+            $grid->disableExport();
+            $grid->filter(function($filter) {
+              $filter->disableIdFilter();
+            });
+            $grid->disableRowSelector();
         });
     }
 
+    public function checkOn(Request $request)
+    {
+        foreach (Template::where('status', 1)->get() as $template) {
+            $template->status = 0;
+            $template->save();
+        }
+
+        $check = Template::find($request->get('id'));
+        $check->status = 1;
+        $check->save();
+        return $request->get('id');
+    }
     /**
      * Make a form builder.
      *
@@ -97,11 +122,6 @@ class TemplateController extends Controller
 
             $form->display('id', 'ID');
             $form->image('body_image', '背景图片');
-            $form->text('color', '文本颜色');
-            $form->number('left', '左边距')->default(0);
-            $form->number('right', '右边距')->default(0);
-            $form->number('top', '上边距')->default(0);
-            $form->number('bottom', '下边距')->default(0);
             $form->display('created_at', '创建时间');
             $form->display('updated_at', '编辑时间');
         });

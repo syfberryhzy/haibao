@@ -151,17 +151,6 @@ class AdminMenuTableSeeder extends Seeder
             ),
             12 => 
             array (
-                'id' => 13,
-                'parent_id' => 8,
-                'order' => 0,
-                'title' => 'DIY海报',
-                'icon' => 'fa-area-chart',
-                'uri' => '/diy',
-                'created_at' => '2018-01-06 19:01:17',
-                'updated_at' => '2018-01-06 19:01:17',
-            ),
-            13 => 
-            array (
                 'id' => 14,
                 'parent_id' => 8,
                 'order' => 0,

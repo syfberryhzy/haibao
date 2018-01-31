@@ -17,5 +17,6 @@ Route::group([
     $router->resource('/paragraph', 'ParagraphController');
     $router->resource('/diy', 'DiyController');
     $router->resource('/template', 'TemplateController');
+    $router->post('/template/checkon', 'TemplateController@checkOn');
 
 });

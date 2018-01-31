@@ -72,7 +72,7 @@ class UserController extends Controller
     protected function grid()
     {
         return Admin::grid(User::class, function (Grid $grid) {
-
+            $grid->model()->orderby('id', 'desc');
             $grid->id('ID')->sortable();
             $grid->avatar('头像')->image('', 50, 50);
             $grid->name('用户名');
@@ -82,9 +82,8 @@ class UserController extends Controller
                 return '<img src="'. $url. '" style="width:50px;height:50px;">';
             });
             $grid->openid('标识');
-            $grid->status('状态');
+            $grid->status('状态')->sortable();
             $grid->created_at('创建时间');
-            // $grid->updated_at('编辑时间');
             $grid->disableCreation();
             $grid->disableActions();
             $grid->disableRowSelector();
