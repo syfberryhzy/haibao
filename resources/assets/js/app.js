@@ -12,6 +12,8 @@ window.Vue = require('vue');
 require('amfe-flexible');
 require('weui');
 
+window.Cookies = require('js-cookie');
+
 window.VueLazyLoad = require('vue-lazyload');
 Vue.use(VueLazyLoad,{
     error:'./static/error.png',
@@ -47,10 +49,7 @@ window.weui = require('weui.js');
  */
 
 Vue.component('guest', require('./pages/Guest.vue'));
-Vue.component('user-index', require('./pages/UserIndex.vue'));
 Vue.component('poster-create', require('./pages/PosterCreate.vue'));
-Vue.component('poster-index', require('./pages/PosterIndex.vue'));
-Vue.component('poster-show', require('./pages/PosterShow.vue'));
 Vue.component('category-lettres', require('./pages/CategoryLettres.vue'));
 Vue.component('lettre-index', require('./pages/LettreIndex.vue'));
 Vue.component('picture-index', require('./pages/PictureIndex.vue'));

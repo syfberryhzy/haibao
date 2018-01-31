@@ -88,6 +88,37 @@ a.picture-more {
 .bg {
     background-image: url('/images/templete.png');
     background-size: 100% 100%;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 1;
+}
+.center {
+    background: #fff;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 2;
+}
+.top {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 3;
+}
+.canvas {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 4;
+
+    canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+    }
 }
 .gallery {
     display: flex;
@@ -109,4 +140,5 @@ a.picture-more {
     position: absolute;
     top: 53.3vh;
     right: 20px;
+    z-index: 6;
 }

@@ -16,7 +16,7 @@
                 <img v-for="(picture, index) in hotpictures" 
                     :key="index" 
                     v-lazy="picture.value" 
-                    @click="change(picture.id, picture.value)" 
+                    @click="hotChange(index, picture.value)" 
                     width="90" height="90">
             </div>
         </div>
@@ -26,7 +26,7 @@
                 <img v-for="(picture, index) in newpictures" 
                     :key="index" 
                     v-lazy="picture.value"  
-                    @click="change(picture.id, picture.value)" 
+                    @click="newChange(index, picture.value)" 
                     width="90" height="90">
             </div>
         </div>
@@ -44,7 +44,7 @@ export default {
         }
     },
     methods: {
-        change(id, img) {
+        newChange(id, img) {
             weui.confirm(`<img src="${img}">`, {
                 title: '确认选用该美图吗?',
                 buttons: [{
@@ -57,19 +57,27 @@ export default {
                     label: '确认',
                     type: 'primary',
                     onClick: () => {
-                        axios.post(`/pictures/${id}`)
-                        .then((response) => {
-                            console.log(response.data);
-                            weui.toast(response.data.data, {
-                                duration: 2000,
-                                callback: () => {
-                                    window.location.href = '/user/poster/create'
-                                }
-                            });
-                        })
-                        .catch((error) => {
-                            console.log(error.response.data);
-                        })
+                        Cookies.set('picture', this.newpictures[id]);
+                        window.location.href = '/user/poster/create'
+                    }
+                }]
+            });
+        },
+        hotChange(id, img) {
+            weui.confirm(`<img src="${img}">`, {
+                title: '确认选用该美图吗?',
+                buttons: [{
+                    label: '再看看',
+                    type: 'default',
+                    onClick: () => {
+                        console.log('no');
+                    }
+                }, {
+                    label: '确认',
+                    type: 'primary',
+                    onClick: () => {
+                        Cookies.set('picture', this.hotpictures[id]);
+                        window.location.href = '/user/poster/create'
                     }
                 }]
             });

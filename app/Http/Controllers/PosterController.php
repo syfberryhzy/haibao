@@ -17,46 +17,7 @@ class PosterController extends Controller
 
     public function create()
     {
-        $user = auth()->user();
-        $lettre = Cache::get("user." . $user->id . "lettre");
-        $picture = Cache::get("user." . $user->id . "picture");
-
         $template = Template::where('status', 1)->first();
-        return view('poster.create', compact('lettre', 'picture', 'template'));
-    }
-
-    public function index()
-    {
-        $posters = auth()->user()->poster->each(function ($item) {
-            $item->image = unserialize($item->image);
-            $item->post = unserialize($item->post);
-        });
-        return view('poster.index', compact('posters'));
-    }
-
-    public function store(PosterRequest $request)
-    {
-        $file_path = request()->file('file')->store('haibao', 'admin');
-
-        $user = auth()->user();
-        $picture = Cache::get("user." . $user->id . "picture");
-        $lettre = Cache::get("user." . $user->id . "lettre");
-
-        $poster = $user->addPoster([
-            'template_id' => $request->template_id,
-            'image' => ($picture && $picture->value === $request->img) ? serialize($picture) : serialize($request->img),
-            'post' => ($lettre && $lettre->value === $request->contract) ? serialize($lettre) : serialize($request->contract),
-            'diy_image' => $file_path,
-            'status' => 1
-        ]);
-        Cache::forget("user." . $user->id . "picture");
-        Cache::forget("user." . $user->id . "lettre");
-
-        return response(['data' => $poster], 201);
-    }
-
-    public function show(Diy $diy)
-    {
-        return view('poster.show', compact('diy'));
+        return view('poster.create', compact('template'));
     }
 }

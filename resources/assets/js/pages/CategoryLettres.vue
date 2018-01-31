@@ -4,7 +4,7 @@
             <div class="weui-panel__hd">{{title}}</div>
             <div class="weui-panel__bd">
                 <div v-for="(lettre, index) in lettres" :key="index" class="weui-media-box weui-media-box_text">
-                    <h4 class="weui-media-box__title" style="line-height: 2.3;">{{ lettre.author }}《{{ lettre.title }}》<a href="javascript:;" @click="change(lettre.id)" class="weui-btn weui-btn_mini weui-btn_plain-primary" style="float:right">选用</a></h4>
+                    <h4 class="weui-media-box__title" style="line-height: 2.3;">{{ lettre.author }}《{{ lettre.title }}》<a href="javascript:;" @click="change(index)" class="weui-btn weui-btn_mini weui-btn_plain-primary" style="float:right">选用</a></h4>
                     <p class="weui-media-box__desc">{{ lettre.value }}</p>
                 </div>
             </div>
@@ -40,19 +40,8 @@ export default {
                     label: '确认',
                     type: 'primary',
                     onClick: () => {
-                        axios.post(`/lettres/${id}`)
-                        .then((response) => {
-                            console.log(response.data);
-                            weui.toast(response.data.data, {
-                                duration: 2000,
-                                callback: () => {
-                                    window.location.href = '/user/poster/create'
-                                }
-                            });
-                        })
-                        .catch((error) => {
-                            console.log(error.response.data);
-                        })
+                        Cookies.set('lettre', this.lettres[id]);
+                        window.location.href = '/user/poster/create'
                     }
                 }]
             });

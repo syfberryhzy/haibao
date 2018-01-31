@@ -6,7 +6,7 @@
                 <img v-for="(picture, index) in pictures" 
                     :key="index" 
                     v-lazy="picture.value" 
-                    @click="change(picture.id, picture.value)" 
+                    @click="change(index, picture.value)" 
                     width="90" 
                     height="90">
             </div>
@@ -36,19 +36,8 @@ export default {
                     label: '确认',
                     type: 'primary',
                     onClick: () => {
-                        axios.post(`/pictures/${id}`)
-                        .then((response) => {
-                            console.log(response.data);
-                            weui.toast(response.data.data, {
-                                duration: 2000,
-                                callback: () => {
-                                    window.location.href = '/user/poster/create'
-                                }
-                            });
-                        })
-                        .catch((error) => {
-                            console.log(error.response.data);
-                        })
+                        Cookies.set('picture', this.pictures[id]);
+                        window.location.href = '/user/poster/create'
                     }
                 }]
             });

@@ -17,7 +17,8 @@ class PublicController extends Controller
 
         \Auth::login($user);
 
-        return redirect()->route('user.index');
+        // return redirect()->route('user.index');
+        return redirect()->route('poster.create');
     }
 
 
