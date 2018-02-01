@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Log;
 use EasyWeChat\Kernel\Messages\News;
 use EasyWeChat\Kernel\Messages\NewsItem;
+use Illuminate\Http\Request;
 
 class WeChatController extends Controller
 {
@@ -33,6 +34,20 @@ class WeChatController extends Controller
         });
 
         return $app->server->serve();
+    }
+
+    public function upload(Request $request)
+    {
+        $app = app('wechat.official_account');
+        $stream = $app->media->get($request->serverId);
+
+        $filename = $stream->saveAs('/uploads');
+
+        $img = Image::make('/uploads/' . $filename);
+        $dataUrl = (string) $img->encode('data-url');
+        $img->destroy();
+
+        return $dataUrl;
     }
 
     public function menu()

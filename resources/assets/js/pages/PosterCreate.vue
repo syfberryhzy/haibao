@@ -116,8 +116,21 @@ export default {
                                         }
                                     });
                                 } else {
-                                    Cookies.set('picture', localId);
-                                    $('#img-top').attr('src', localId);
+                                    wx.uploadImage({
+                                        localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
+                                        isShowProgressTips: 1, // 默认为1，显示进度提示
+                                        success: function (res) {
+                                            var serverId = res.serverId; // 返回图片的服务器端ID
+                                            axios.post('/wechat/upload', {
+                                                serverId: serverId
+                                            }).then(response => {
+                                                console.log(response);
+                                                var img = response.data;
+                                                Cookies.set('picture', img);
+                                                $('#img-top').attr('src', img);
+                                            })
+                                        }
+                                    });
                                 }
                             }
                         });
