@@ -40,8 +40,9 @@ export default {
     created() {
         let lettre = Cookies.getJSON('lettre'),
             picture = Cookies.getJSON('picture');
+            console.log(picture);
         if (typeof picture === 'object') {
-            this.img = picture.image;
+            this.img = '/uploads/' + picture.value;
         } else if (typeof picture === 'string') {
             this.img = picture;
         }

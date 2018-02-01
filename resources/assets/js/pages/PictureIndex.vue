@@ -15,8 +15,8 @@
             <div class="weui-panel__bd gallery">
                 <img v-for="(picture, index) in hotpictures" 
                     :key="index" 
-                    v-lazy="picture.image" 
-                    @click="hotChange(index, picture.image)" 
+                    v-lazy="'/uploads/' + picture.image" 
+                    @click="hotChange(index, '/uploads/' + picture.image)" 
                     width="90" height="90">
             </div>
         </div>
@@ -25,8 +25,8 @@
             <div class="weui-panel__bd gallery">
                 <img v-for="(picture, index) in newpictures" 
                     :key="index" 
-                    v-lazy="picture.image"  
-                    @click="newChange(index, picture.image)" 
+                    v-lazy="'/uploads/' + picture.image"  
+                    @click="newChange(index, '/uploads/' + picture.image)" 
                     width="90" height="90">
             </div>
         </div>

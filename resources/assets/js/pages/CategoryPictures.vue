@@ -5,8 +5,8 @@
             <div class="weui-panel__bd gallery-list">
                 <img v-for="(picture, index) in pictures" 
                     :key="index" 
-                    v-lazy="picture.image" 
-                    @click="change(index, picture.image)" 
+                    v-lazy="'/uploads/' + picture.value" 
+                    @click="change(index, '/uploads/' + picture.value)" 
                     width="90" 
                     height="90">
             </div>
