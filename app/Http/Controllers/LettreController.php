@@ -17,13 +17,13 @@ class LettreController extends Controller
     public function index()
     {
         $lettreCategory = Category::where('parent_id', Category::MEIWEN_PID)->get();
-        $hotLettres = Paragraph::latest()->paginate(5);
+        $hotLettres = Paragraph::where('status', 1)->latest()->paginate(5);
         return view('lettre.index', compact('lettreCategory', 'hotLettres'));
     }
 
     public function hot()
     {
-        $lettres = Paragraph::latest()->get();
+        $lettres = Paragraph::where('status', 1)->latest()->get();
         $title = '最热美文';
         return view('category.lettres', compact('lettres', 'title'));
     }

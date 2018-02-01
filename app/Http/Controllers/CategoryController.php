@@ -29,14 +29,14 @@ class CategoryController extends Controller
 
     public function lettres(Request $request, Category $category)
     {
-        $lettres = $category->lettres;
+        $lettres = $category->lettres()->where('status', 1)->get();
         $title = $category->title;
         return view('category.lettres', compact('lettres', 'title'));
     }
 
     public function pictures(Request $request, Category $category)
     {
-        $pictures = $category->galleries;
+        $pictures = $category->galleries()->where('status', 1)->get();
         $title = $category->title;
         return view('category.pictures', compact('pictures', 'title'));
     }

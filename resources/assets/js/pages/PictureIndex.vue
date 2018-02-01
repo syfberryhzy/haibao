@@ -15,8 +15,8 @@
             <div class="weui-panel__bd gallery">
                 <img v-for="(picture, index) in hotpictures" 
                     :key="index" 
-                    v-lazy="picture.value" 
-                    @click="hotChange(index, picture.value)" 
+                    v-lazy="picture.image" 
+                    @click="hotChange(index, picture.image)" 
                     width="90" height="90">
             </div>
         </div>
@@ -25,8 +25,8 @@
             <div class="weui-panel__bd gallery">
                 <img v-for="(picture, index) in newpictures" 
                     :key="index" 
-                    v-lazy="picture.value"  
-                    @click="newChange(index, picture.value)" 
+                    v-lazy="picture.image"  
+                    @click="newChange(index, picture.image)" 
                     width="90" height="90">
             </div>
         </div>
@@ -45,7 +45,7 @@ export default {
     },
     methods: {
         newChange(id, img) {
-            weui.confirm(`<img src="${img}">`, {
+            weui.confirm(`<img src="${img}" width="100%">`, {
                 title: '确认选用该美图吗?',
                 buttons: [{
                     label: '再看看',

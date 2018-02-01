@@ -30,7 +30,7 @@ class CategoryController extends Controller
             $content->description('所有分类都在这里哦～');
             $content->body(Category::tree(function ($tree) {
                 $tree->branch(function ($branch) {
-                    $src = config('admin.upload.host') . '/' . $branch['icon'] ;
+                    $src = '/uploads/' . $branch['icon'] ;
                     $logo = "<img src='$src' style='max-width:30px;max-height:30px' class='img'/>";
 
                     return "{$branch['id']} - $logo - {$branch['title']}";

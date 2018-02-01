@@ -17,21 +17,21 @@ class PictureController extends Controller
     public function index()
     {
         $pictureCategory = Category::where('parent_id', Category::TUPIAN_PID)->get();
-        $hotPictures = Gallery::latest('click_num')->paginate(3);
-        $newPictures = Gallery::latest()->paginate(3);
+        $hotPictures = Gallery::where('status', 1)->latest('click_num')->paginate(3);
+        $newPictures = Gallery::where('status', 1)->latest()->paginate(3);
         return view('picture.index', compact('pictureCategory', 'hotPictures', 'newPictures'));
     }
 
     public function hot()
     {
-        $pictures = Gallery::latest('click_num')->get();
+        $pictures = Gallery::where('status', 1)->latest('click_num')->get();
         $title = '最热图片';
         return view('category.pictures', compact('pictures', 'title'));
     }
 
     public function new()
     {
-        $pictures = Gallery::latest()->get();
+        $pictures = Gallery::where('status', 1)->latest()->get();
         $title = '最新图片';
         return view('category.pictures', compact('pictures', 'title'));
     }

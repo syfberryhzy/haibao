@@ -8,12 +8,12 @@
                     <p class="weui-media-box__desc">{{ lettre.value }}</p>
                 </div>
             </div>
-            <div class="weui-panel__ft">
+            <!-- <div class="weui-panel__ft">
                 <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">
                     <div class="weui-cell__bd">查看更多</div>
                     <span class="weui-cell__ft"></span>
                 </a>    
-            </div>
+            </div> -->
         </div>
     </div>
 </template>

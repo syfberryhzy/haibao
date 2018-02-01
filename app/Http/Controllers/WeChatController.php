@@ -41,13 +41,14 @@ class WeChatController extends Controller
         $app = app('wechat.official_account');
         $stream = $app->media->get($request->serverId);
 
-        $filename = $stream->saveAs('/uploads');
+        $filename = $stream->save(public_path('uploads'));
+        
+        return public_path('uploads') . '/' . $filename;
+        // $img = \Image::make(public_path('uploads') . '/' . $filename);
+        // $dataUrl = (string) $img->encode('data-url');
+        // $img->destroy();
 
-        $img = Image::make('/uploads/' . $filename);
-        $dataUrl = (string) $img->encode('data-url');
-        $img->destroy();
-
-        return $dataUrl;
+        // return $dataUrl;
     }
 
     public function menu()

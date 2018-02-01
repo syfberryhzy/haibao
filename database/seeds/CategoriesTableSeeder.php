@@ -43,7 +43,7 @@ class CategoriesTableSeeder extends Seeder
             array (
                 'id' => 3,
                 'title' => '歌词歌单',
-                'icon' => '/images/singer.png',
+                'icon' => 'images/singer.png',
                 'parent_id' => 1,
                 'order' => 2,
                 'status' => 1,
@@ -54,7 +54,7 @@ class CategoriesTableSeeder extends Seeder
             array (
                 'id' => 4,
                 'title' => '影视动漫',
-                'icon' => '/images/comic.png',
+                'icon' => 'images/comic.png',
                 'parent_id' => 1,
                 'order' => 3,
                 'status' => 1,
@@ -65,7 +65,7 @@ class CategoriesTableSeeder extends Seeder
             array (
                 'id' => 5,
                 'title' => '其他美文',
-                'icon' => '/images/other.png',
+                'icon' => 'images/other.png',
                 'parent_id' => 1,
                 'order' => 0,
                 'status' => 1,
@@ -76,7 +76,7 @@ class CategoriesTableSeeder extends Seeder
             array (
                 'id' => 6,
                 'title' => '文学著作',
-                'icon' => '/images/literature.png',
+                'icon' => 'images/literature.png',
                 'parent_id' => 1,
                 'order' => 0,
                 'status' => 1,
@@ -87,7 +87,7 @@ class CategoriesTableSeeder extends Seeder
             array (
                 'id' => 7,
                 'title' => '名人名言',
-                'icon' => '/images/motto.png',
+                'icon' => 'images/motto.png',
                 'parent_id' => 1,
                 'order' => 0,
                 'status' => 1,
@@ -98,7 +98,7 @@ class CategoriesTableSeeder extends Seeder
             array (
                 'id' => 8,
                 'title' => '电影台词',
-                'icon' => '/images/movie.png',
+                'icon' => 'images/movie.png',
                 'parent_id' => 1,
                 'order' => 0,
                 'status' => 1,
@@ -109,7 +109,7 @@ class CategoriesTableSeeder extends Seeder
             array (
                 'id' => 9,
                 'title' => '风景',
-                'icon' => '/images/scenery.png',
+                'icon' => 'images/scenery.png',
                 'parent_id' => 2,
                 'order' => 0,
                 'status' => 1,
@@ -120,7 +120,7 @@ class CategoriesTableSeeder extends Seeder
             array (
                 'id' => 10,
                 'title' => '动物',
-                'icon' => '/images/animal.png',
+                'icon' => 'images/animal.png',
                 'parent_id' => 2,
                 'order' => 0,
                 'status' => 1,
@@ -131,7 +131,7 @@ class CategoriesTableSeeder extends Seeder
             array (
                 'id' => 11,
                 'title' => '星空',
-                'icon' => '/images/sky.png',
+                'icon' => 'images/sky.png',
                 'parent_id' => 2,
                 'order' => 0,
                 'status' => 1,
@@ -142,7 +142,7 @@ class CategoriesTableSeeder extends Seeder
             array (
                 'id' => 12,
                 'title' => '浪漫',
-                'icon' => '/images/romantic.png',
+                'icon' => 'images/romantic.png',
                 'parent_id' => 2,
                 'order' => 0,
                 'status' => 1,
@@ -153,7 +153,7 @@ class CategoriesTableSeeder extends Seeder
             array (
                 'id' => 13,
                 'title' => '艺术',
-                'icon' => '/images/art.png',
+                'icon' => 'images/art.png',
                 'parent_id' => 2,
                 'order' => 0,
                 'status' => 1,
@@ -164,7 +164,7 @@ class CategoriesTableSeeder extends Seeder
             array (
                 'id' => 14,
                 'title' => '植物',
-                'icon' => '/images/botany.png',
+                'icon' => 'images/botany.png',
                 'parent_id' => 2,
                 'order' => 0,
                 'status' => 1,

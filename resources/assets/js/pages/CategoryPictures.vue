@@ -5,8 +5,8 @@
             <div class="weui-panel__bd gallery-list">
                 <img v-for="(picture, index) in pictures" 
                     :key="index" 
-                    v-lazy="picture.value" 
-                    @click="change(index, picture.value)" 
+                    v-lazy="picture.image" 
+                    @click="change(index, picture.image)" 
                     width="90" 
                     height="90">
             </div>
@@ -24,7 +24,7 @@ export default {
     },
     methods: {
         change(id, img) {
-            weui.confirm(`<img src="${img}">`, {
+            weui.confirm(`<img src="${img}" width="100%">`, {
                 title: '确认选用该美图吗?',
                 buttons: [{
                     label: '再看看',

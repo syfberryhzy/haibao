@@ -41,14 +41,14 @@ export default {
         let lettre = Cookies.getJSON('lettre'),
             picture = Cookies.getJSON('picture');
         if (typeof picture === 'object') {
-            this.img = picture.value;
+            this.img = picture.image;
         } else if (typeof picture === 'string') {
             this.img = picture;
         }
         if (typeof lettre === 'object') {
             this.contract = lettre.value;
             this.title = `${lettre.author} | ${lettre.title}`
-        } else if (typeof picture === 'string') {
+        } else if (typeof lettre === 'string') {
             this.contract = lettre;
         }
         
@@ -106,17 +106,17 @@ export default {
                             sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
                             success: function (res) {
                                 var localId = res.localIds[0];
-                                if (window.wxjs_is_wkwebview == true) {
-                                    wx.getLocalImgData({
-                                        localId: localId, // 图片的localID
-                                        success: function (res) {
-                                            console.log(res);
-                                            var img = res.localData;
-                                            Cookies.set('picture', img);
-                                            $('#img-top').attr('src', img);
-                                        }
-                                    });
-                                } else {
+                                // if (window.__wxjs_is_wkwebview == true) {
+                                //     wx.getLocalImgData({
+                                //         localId: localId, // 图片的localID
+                                //         success: function (res) {
+                                //             console.log(res);
+                                //             var img = res.localData;
+                                //             Cookies.set('picture', img);
+                                //             $('#img-top').attr('src', img);
+                                //         }
+                                //     });
+                                // } else {
                                     wx.uploadImage({
                                         localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
                                         isShowProgressTips: 1, // 默认为1，显示进度提示
@@ -132,7 +132,7 @@ export default {
                                             })
                                         }
                                     });
-                                }
+                                // }
                             }
                         });
                     }
@@ -170,6 +170,7 @@ export default {
             var loading = weui.loading('海报生成中', {
                 className: 'custom-classname'
             });
+            Cookies.set('lettre', this.contract);
             html2canvas(document.querySelector("#poster"), {
                 imageTimeout: 15000
             }).then(canvas => {
