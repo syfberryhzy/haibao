@@ -106,10 +106,11 @@ export default {
                             sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
                             success: function (res) {
                                 var localId = res.localIds[0];
-                                if (window.wxjs_is_wkwebview === true || window.wxjs_is_wkwebview === true) {
+                                if (window.wxjs_is_wkwebview == true) {
                                     wx.getLocalImgData({
                                         localId: localId, // 图片的localID
                                         success: function (res) {
+                                            console.log(res);
                                             var img = res.localData;
                                             Cookies.set('picture', img);
                                             $('#img-top').attr('src', img);
