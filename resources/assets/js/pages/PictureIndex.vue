@@ -3,7 +3,7 @@
         <div class="weui-grids bg-white">
             <a v-for="(category, index) in categories" :key="index" :href="`/categories/${category.id}`" class="weui-grid">
                 <div class="weui-grid__icon">
-                    <img :src="category.icon" alt="">
+                    <img :src="'/uploads/' + category.icon" alt="">
                 </div>
                 <p class="weui-grid__label">
                     {{ category.title }}
@@ -11,23 +11,23 @@
             </a>
         </div>
         <div class="weui-panel weui-panel_access">
-            <div class="weui-panel__hd">最新图片<a class="picture-more" href="/pictures/new">更多</a></div>
+            <div class="weui-panel__hd">最热图片<a class="picture-more" href="/pictures/hot">更多</a></div>
             <div class="weui-panel__bd gallery">
                 <img v-for="(picture, index) in hotpictures" 
                     :key="index" 
-                    v-lazy="'/uploads/' + picture.image" 
-                    @click="hotChange(index, '/uploads/' + picture.image)" 
-                    width="90" height="90">
+                    v-lazy="'/uploads/' + picture.value" 
+                    @click="hotChange(index, '/uploads/' + picture.value)" 
+		    class="haibao-img">
             </div>
         </div>
         <div class="weui-panel weui-panel_access">
-            <div class="weui-panel__hd">最热图片<a class="picture-more" href="/pictures/hot">更多</a></div>
+            <div class="weui-panel__hd">最新图片<a class="picture-more" href="/pictures/new">更多</a></div>
             <div class="weui-panel__bd gallery">
                 <img v-for="(picture, index) in newpictures" 
                     :key="index" 
-                    v-lazy="'/uploads/' + picture.image"  
-                    @click="newChange(index, '/uploads/' + picture.image)" 
-                    width="90" height="90">
+                    v-lazy="'/uploads/' + picture.value"  
+                    @click="newChange(index, '/uploads/' + picture.value)" 
+                    class="haibao-img">
             </div>
         </div>
     </div>

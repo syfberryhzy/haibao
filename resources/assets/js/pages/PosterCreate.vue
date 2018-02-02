@@ -1,6 +1,6 @@
 <template>
     <div class="container h-full" id="poster">
-        <div class="bg"></div>
+        <div class="bg" :style="bg"></div>
         <div class="center" data-html2canvas-ignore="true"></div>
         <div class="top" v-show="poster">
             <div class="poster-create-top">
@@ -13,7 +13,7 @@
             <div class="poster-create-bottom">
                 <p v-if="title">&nbsp;{{ title }}<a class="belles-lettres" href="javascript:;" @click="changeLettre" data-html2canvas-ignore="true"><img src="/images/edit.png" alt=""></a></p>
                 <p v-else>&nbsp;<a class="belles-lettres" href="javascript:;" @click="changeLettre" data-html2canvas-ignore="true"><img src="/images/edit.png" alt=""></a></p>
-                <textarea contenteditable="true" name="" id="" cols="30" rows="8" placeholder="请留下你的声音" v-model="contract" @change="changContract"></textarea>
+                <textarea v-focus="focusStatus" contenteditable="true" name="" id="" cols="30" rows="8" placeholder="请留下你的声音" v-model="contract" @change="changContract"></textarea>
                 <a href="javascript:;" class="weui-btn weui-btn_primary" data-html2canvas-ignore="true" @click="createImg">生成海报</a>
             </div>
         </div>
@@ -35,6 +35,10 @@ export default {
             title: '',
             poster: true,
             posterImg: '',
+	    focusStatus: false,
+	    bg: {
+	    	backgroundImage: `url(/uploads/${this.template.body_image})`
+    	    }
         }
     },
     created() {
@@ -75,6 +79,7 @@ export default {
                     label: '自己编写',
                     onClick: function () {
                         weui.alert('请在下方编辑器里面输入美文')
+			// this.focusStatus = true;
                     }
                 }, {
                     label: '从美文中选择',
@@ -171,7 +176,16 @@ export default {
             var loading = weui.loading('海报生成中', {
                 className: 'custom-classname'
             });
-            Cookies.set('lettre', this.contract);
+            var lettre = Cookies.getJSON('lettre');
+           
+        if (typeof lettre === 'object') {
+            let contract = lettre.value;
+		if (contract !== this.contract) {
+			Cookies.set('lettre', this.contract);
+		}
+        } else if (typeof lettre === 'string') {
+			Cookies.set('lettre', this.contract);
+        }
             html2canvas(document.querySelector("#poster"), {
                 imageTimeout: 15000
             }).then(canvas => {
