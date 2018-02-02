@@ -76,7 +76,10 @@ class TemplateController extends Controller
         return Admin::grid(Template::class, function (Grid $grid) {
             $grid->model()->orderby('id', 'desc');
             $grid->id('ID')->sortable();
-            $grid->body_image('背景图片')->image();
+            $grid->body_image('背景图片')->display(function ($img) {
+              $img = preg_match('/http/', $img) ? $img : config('app.url'). '/uploads/' .$img;
+              return '<img src="'. $img .'" style="width:180px;height:150px;">';
+            });;
             $grid->status('状态')->display(function($status) {
               $text =  $status == 1 ? '开启' : '关闭';
               $color =  $status == 1 ? 'bg-blue' : 'bg-yellow';

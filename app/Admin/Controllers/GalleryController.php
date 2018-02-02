@@ -79,6 +79,7 @@ class GalleryController extends Controller
             $grid->title('名称');
             // $grid->value('图片')->image();
             $grid->value('图片')->display(function ($img) {
+              $img = preg_match('/http/', $img) ? $img : config('app.url'). '/uploads/' .$img;
               return '<img src="'. $img .'" style="width:180px;height:150px;">';
             });
             $grid->description('简述')->display(function ($str) {

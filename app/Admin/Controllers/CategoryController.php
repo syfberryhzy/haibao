@@ -30,9 +30,13 @@ class CategoryController extends Controller
             $content->description('所有分类都在这里哦～');
             $content->body(Category::tree(function ($tree) {
                 $tree->branch(function ($branch) {
-                    $src = '/uploads/' . $branch['icon'] ;
+                    // $src = '/uploads/' . $branch['icon'] ;
+                    $src = preg_match('/http/', $branch['icon']) ? $branch['icon'] : config('app.url'). '/uploads/' .$branch['icon'];
                     $logo = "<img src='$src' style='max-width:30px;max-height:30px' class='img'/>";
-
+                    
+                    if (in_array($branch['id'], [1, 2])) {
+                      return "{$branch['id']} - {$branch['title']}";
+                    };
                     return "{$branch['id']} - $logo - {$branch['title']}";
                 });
             }));
