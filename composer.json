@@ -13,7 +13,8 @@
         "laravel/tinker": "~1.0",
         "orangehill/iseed": "dev-master",
         "overtrue/laravel-wechat": "~4.0",
-        "phpunit/phpunit": "^6.5"
+        "phpunit/phpunit": "^6.5",
+        "predis/predis": "^1.1"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

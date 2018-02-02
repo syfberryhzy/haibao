@@ -4,7 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Models\Gallery;
 use App\Models\Category;
-
+use Illuminate\Support\Facades\Cache;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Facades\Admin;
@@ -45,7 +45,7 @@ class GalleryController extends Controller
             $content->header('图片库');
             $content->description('编辑');
 
-            $content->body($this->form()->edit($id));
+            $content->body($this->singleForm()->edit($id));
         });
     }
 
@@ -77,11 +77,7 @@ class GalleryController extends Controller
             $grid->id('ID')->sortable();
             $grid->column('category.title', '分类名称')->badge('green');
             $grid->title('名称');
-            // $grid->value('图片')->image();
-            $grid->value('图片')->display(function ($img) {
-              $img = preg_match('/http/', $img) ? $img : config('app.url'). '/uploads/' .$img;
-              return '<img src="'. $img .'" style="width:180px;height:150px;">';
-            });
+            $grid->value('图片')->image();
             $grid->description('简述')->display(function ($str) {
               return '<div style="width:250px;height:120px;">'. $str . '</div>';
             });
@@ -125,12 +121,12 @@ class GalleryController extends Controller
             // $form->select('category_id', '分类')->options(Category::where('parent_id', Category::TUPIAN_PID)->get()->pluck('title', 'id'));
             $form->select('category_id', '分类')->options(Category::buildSelectOptions($nodes = [], $parentId = Category::TUPIAN_PID, $prefix = ''));
             $form->text('title', '名称')->rules('nullable')->help('**可不填**');
-            $form->image('value', '图片')->crop(375, 300);
+            $form->multipleImage('value', '图片')->crop(375, 300)->removable()->help('<span style="color:red;">**添加时允许多图上传。编辑时只允许单图上传**</span>');
             // 剪裁图片
-// $form->image($column[, $label])->crop(int $width, int $height, [int $x, int $y]);
+            // $form->image($column[, $label])->crop(int $width, int $height, [int $x, int $y]);
 
-// 加水印
-// $form->image($column[, $label])->insert($watermark, 'center');
+            // 加水印
+            // $form->image($column[, $label])->insert($watermark, 'center');
             $form->textarea('description', '简述')->rules('nullable')->help('**可不填**');
             $form->number('click_num', '点击量')->default(0);
             $form->number('use_num', '使用量')->default(0);
@@ -142,18 +138,41 @@ class GalleryController extends Controller
 
             $form->display('created_at', '创建时间');
             $form->display('updated_at', '编辑时间');
-            dd($form);
+            //保存后回调
+            $form->saved(function (Form $form) {
+                $this->otherImage($form);
+            });
         });
     }
 
-    protected function multipleForm()
+    public function otherImage($form)
+    {
+      // $vals = $form->model()->value;
+      $vals = Cache::pull('images');
+      if ($vals && count($vals) > 0) {
+        $data = [
+          'category_id' => $form->model()->category_id,
+          'created_at' => $form->model()->created_at,
+          'title' => $form->model()->title,
+          'description' => $form->model()->description,
+          'status' => $form->model()->status
+        ];
+        foreach($vals as $val) {
+          $data['value'] = $val;
+          $datas[] = $data;
+        }
+        Gallery::insert($datas);
+      }
+      // $form->model()->delete();
+    }
+    protected function singleForm()
     {
         return Admin::form(Gallery::class, function (Form $form) {
 
             // $form->select('category_id', '分类')->options(Category::where('parent_id', Category::TUPIAN_PID)->get()->pluck('title', 'id'));
             $form->select('category_id', '分类')->options(Category::buildSelectOptions($nodes = [], $parentId = Category::TUPIAN_PID, $prefix = ''));
             $form->text('title', '名称')->rules('nullable')->help('**可不填**');
-            $form->multipleImage('value', '多图上传')->removable();
+            $form->image('value', '图片')->removable()->help('<span style="color:red;">**添加时允许多图上传。编辑时只允许单图上传**</span>');
             $form->textarea('description', '简述')->rules('nullable')->help('**可不填**');
             $form->number('click_num', '点击量')->default(0);
             $form->number('use_num', '使用量')->default(0);

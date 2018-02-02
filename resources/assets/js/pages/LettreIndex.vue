@@ -3,7 +3,7 @@
         <div class="weui-grids bg-white">
             <a v-for="(category, index) in categories" :key="index" :href="`/categories/${category.id}`" class="weui-grid">
                 <div class="weui-grid__icon">
-                    <img :src="category.icon" alt="">
+                    <img :src="'/uploads/' + category.icon" alt="">
                 </div>
                 <p class="weui-grid__label">
                     {{ category.title }}

@@ -16,6 +16,8 @@ class Category extends Model
     const TUPIAN_PID = 2;
     const TUPIAN_BY_USER_ID = 3;//用户上传id
 
+    protected $guarded = [];
+
     public function __construct(array $attributes = [])
     {
       parent::__construct($attributes);

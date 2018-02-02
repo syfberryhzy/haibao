@@ -7,8 +7,7 @@
                     :key="index" 
                     v-lazy="'/uploads/' + picture.value" 
                     @click="change(index, '/uploads/' + picture.value)" 
-                    width="90" 
-                    height="90">
+                    class="haibao-img">
             </div>
         </div>
     </div>

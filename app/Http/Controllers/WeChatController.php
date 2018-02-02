@@ -42,9 +42,15 @@ class WeChatController extends Controller
         $stream = $app->media->get($request->serverId);
 
         $filename = $stream->save(public_path('uploads'));
+<<<<<<< HEAD
 
         return public_path('uploads') . '/' . $filename;
         $img = \Image::make(public_path('uploads') . '/' . $filename)->resize(375, 300);
+=======
+        
+        return '/uploads/' . $filename;
+        // $img = \Image::make(public_path('uploads') . '/' . $filename);
+>>>>>>> 9d1f7af3e014b424d5349d216f2b3eba883cc92b
         // $dataUrl = (string) $img->encode('data-url');
         $img->destroy();
 

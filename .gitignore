@@ -2,6 +2,7 @@
 /public/hot
 /public/storage
 /public/uploads/haibao
+/public/uploads/
 /storage/*.key
 /vendor
 /.idea
