@@ -124,8 +124,36 @@ class GalleryController extends Controller
             $form->display('id', 'ID');
             // $form->select('category_id', '分类')->options(Category::where('parent_id', Category::TUPIAN_PID)->get()->pluck('title', 'id'));
             $form->select('category_id', '分类')->options(Category::buildSelectOptions($nodes = [], $parentId = Category::TUPIAN_PID, $prefix = ''));
-            $form->text('title', '名称');
-            $form->image('value', '图片');
+            $form->text('title', '名称')->rules('nullable')->help('**可不填**');
+            $form->image('value', '图片')->crop(375, 300);
+            // 剪裁图片
+// $form->image($column[, $label])->crop(int $width, int $height, [int $x, int $y]);
+
+// 加水印
+// $form->image($column[, $label])->insert($watermark, 'center');
+            $form->textarea('description', '简述')->rules('nullable')->help('**可不填**');
+            $form->number('click_num', '点击量')->default(0);
+            $form->number('use_num', '使用量')->default(0);
+            $states = [
+              'on' => ['value' => '1', 'text' => '可用', 'color' => 'success'],
+              'off' => ['value' => '0', 'text' => '禁用', 'color' => 'danger']
+            ];
+            $form->switch('status', '状态')->states($states)->default(1);
+
+            $form->display('created_at', '创建时间');
+            $form->display('updated_at', '编辑时间');
+            dd($form);
+        });
+    }
+
+    protected function multipleForm()
+    {
+        return Admin::form(Gallery::class, function (Form $form) {
+
+            // $form->select('category_id', '分类')->options(Category::where('parent_id', Category::TUPIAN_PID)->get()->pluck('title', 'id'));
+            $form->select('category_id', '分类')->options(Category::buildSelectOptions($nodes = [], $parentId = Category::TUPIAN_PID, $prefix = ''));
+            $form->text('title', '名称')->rules('nullable')->help('**可不填**');
+            $form->multipleImage('value', '多图上传')->removable();
             $form->textarea('description', '简述')->rules('nullable')->help('**可不填**');
             $form->number('click_num', '点击量')->default(0);
             $form->number('use_num', '使用量')->default(0);
