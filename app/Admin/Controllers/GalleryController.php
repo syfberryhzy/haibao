@@ -11,6 +11,8 @@ use Encore\Admin\Facades\Admin;
 use Encore\Admin\Layout\Content;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\ModelForm;
+use App\Admin\Extensions\Tools\Change;
+use Illuminate\Http\Request;
 
 class GalleryController extends Controller
 {
@@ -105,6 +107,12 @@ class GalleryController extends Controller
                   });
                 }, '分类名称')->select(Category::buildSelectOptions($nodes = [], $parentId = Category::TUPIAN_PID, $prefix = ''));;
             });
+            $grid->tools(function ($tools) {
+                $tools->batch(function ($batch) {
+                    $batch->add('开启图片', new Change(1));
+                    $batch->add('关闭图片', new Change(0));
+                });
+            });
         });
     }
 
@@ -147,7 +155,6 @@ class GalleryController extends Controller
 
     public function otherImage($form)
     {
-      // $vals = $form->model()->value;
       $vals = Cache::pull('images');
       if ($vals && count($vals) > 0) {
         $data = [
@@ -168,8 +175,6 @@ class GalleryController extends Controller
     protected function singleForm()
     {
         return Admin::form(Gallery::class, function (Form $form) {
-
-            // $form->select('category_id', '分类')->options(Category::where('parent_id', Category::TUPIAN_PID)->get()->pluck('title', 'id'));
             $form->select('category_id', '分类')->options(Category::buildSelectOptions($nodes = [], $parentId = Category::TUPIAN_PID, $prefix = ''));
             $form->text('title', '名称')->rules('nullable')->help('**可不填**');
             $form->image('value', '图片')->removable()->help('<span style="color:red;">**添加时允许多图上传。编辑时只允许单图上传**</span>');
@@ -184,5 +189,15 @@ class GalleryController extends Controller
             $form->display('created_at', '创建时间');
             $form->display('updated_at', '编辑时间');
         });
+    }
+    /**
+    * 开启、关闭图片
+    */
+    public function release(Request $request)
+    {
+        foreach (Gallery::find($request->get('ids')) as $pic) {
+            $pic->status = $request->get('action');
+            $pic->save();
+        }
     }
 }

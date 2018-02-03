@@ -4,13 +4,14 @@ namespace App\Admin\Controllers;
 
 use App\Models\Paragraph;
 use App\Models\Category;
-
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Layout\Content;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\ModelForm;
+use Illuminate\Http\Request;
+use App\Admin\Extensions\Tools\Change;
 
 class ParagraphController extends Controller
 {
@@ -104,6 +105,12 @@ class ParagraphController extends Controller
                   });
               }, '分类名称')->select(Category::buildSelectOptions($nodes = [], $parentId = Category::MEIWEN_PID, $prefix = ''));
             });
+            $grid->tools(function ($tools) {
+              $tools->batch(function ($batch) {
+                $batch->add('开启美文', new Change(1));
+                $batch->add('关闭美文', new Change(0));
+              });
+            });
         });
     }
 
@@ -132,5 +139,16 @@ class ParagraphController extends Controller
             $form->display('created_at', '创建时间');
             $form->display('updated_at', '编辑时间');
         });
+    }
+
+    /**
+    * 开启、关闭图片
+    */
+    public function release(Request $request)
+    {
+        foreach (Paragraph::find($request->get('ids')) as $pic) {
+            $pic->status = $request->get('action');
+            $pic->save();
+        }
     }
 }

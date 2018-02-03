@@ -18,5 +18,7 @@ Route::group([
     $router->resource('/diy', 'DiyController');
     $router->resource('/template', 'TemplateController');
     $router->post('/template/checkon', 'TemplateController@checkOn');
+    $router->post('/gallery/release', 'GalleryController@release');
+    $router->post('/pragraph/release', 'PragraphController@release');
 
 });
