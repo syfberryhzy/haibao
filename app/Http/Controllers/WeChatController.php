@@ -42,29 +42,23 @@ class WeChatController extends Controller
         $app = app('wechat.official_account');
         $stream = $app->media->get($request->serverId);
 
-        $filename = $stream->save(public_path('uploads'));
+        $filename = $stream->save(public_path('uploads/fontend'));
 
-        Image::make(public_path('uploads') . '/' . $filename)->resize(375, 300);
-        // $this->reduceSize(public_path('uploads') . '/' . $filename, 375);
+        $this->reduceSize(public_path('uploads/fontend') . '/' . $file_path);
+
         return '/uploads/' . $filename;
-        // $img = \Image::make(public_path('uploads') . '/' . $filename);
-        // $dataUrl = (string) $img->encode('data-url');
-        $img->destroy();
-
-        // return $dataUrl;
     }
 
-    public function reduceSize($file_path, $max_width)
+    public function reduceSize($file_path)
     {
-	    $image = Image::make($file_path);
-	    
-	    $image->resize($max_width, null, function ($constraint) {
-	    	$constraint->aspectRatio();
+        // 先实例化，传参是文件的磁盘物理路径
+        $image = Image::make($file_path);
 
-		$constraint->upsize();
-	    });
+        // 进行大小调整的操作
+        $image->resize(375, 300);
 
-	    $image->save();
+        // 对图片修改后进行保存
+        $image->save();
     }
 
     public function menu()

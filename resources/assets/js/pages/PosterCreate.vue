@@ -10,10 +10,10 @@
                     <p>点击修改图片</p>
                 </div>
             </div>
-            <div class="poster-create-bottom">
+            <div class="poster-create-bottom" :style="fontColor">
                 <p v-if="title">&nbsp;{{ title }}<a class="belles-lettres" href="javascript:;" @click="changeLettre" data-html2canvas-ignore="true"><img src="/images/edit.png" alt=""></a></p>
                 <p v-else>&nbsp;<a class="belles-lettres" href="javascript:;" @click="changeLettre" data-html2canvas-ignore="true"><img src="/images/edit.png" alt=""></a></p>
-                <textarea v-focus="focusStatus" contenteditable="true" name="" id="" cols="30" rows="8" placeholder="请留下你的声音" v-model="contract" @change="changContract"></textarea>
+                <textarea :style="fontColor" v-focus="focusStatus" contenteditable="true" name="" id="" cols="30" rows="8" placeholder="请留下你的声音" v-model="contract" @change="changContract"></textarea>
                 <a href="javascript:;" class="weui-btn weui-btn_primary" data-html2canvas-ignore="true" @click="createImg">生成海报</a>
             </div>
         </div>
@@ -35,10 +35,13 @@ export default {
             title: '',
             poster: true,
             posterImg: '',
-	    focusStatus: false,
-	    bg: {
-	    	backgroundImage: `url(/uploads/${this.template.body_image})`
-    	    }
+            focusStatus: false,
+            bg: {
+                backgroundImage: `url(/uploads/${this.template.body_image})`
+            },
+            fontColor: {
+                color: this.template.color
+            }
         }
     },
     created() {
@@ -178,14 +181,14 @@ export default {
             });
             var lettre = Cookies.getJSON('lettre');
            
-        if (typeof lettre === 'object') {
-            let contract = lettre.value;
-		if (contract !== this.contract) {
-			Cookies.set('lettre', this.contract);
-		}
-        } else if (typeof lettre === 'string') {
-			Cookies.set('lettre', this.contract);
-        }
+            if (typeof lettre === 'object') {
+                let contract = lettre.value;
+            if (contract !== this.contract) {
+                Cookies.set('lettre', this.contract);
+            }
+            } else if (typeof lettre === 'string') {
+                Cookies.set('lettre', this.contract);
+            }
             html2canvas(document.querySelector("#poster"), {
                 imageTimeout: 15000
             }).then(canvas => {

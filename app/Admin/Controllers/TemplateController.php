@@ -80,6 +80,9 @@ class TemplateController extends Controller
               $img = preg_match('/http/', $img) ? $img : config('app.url'). '/uploads/' .$img;
               return '<img src="'. $img .'" style="width:180px;height:150px;">';
             });;
+            $grid->color('字体颜色')->display(function ($color) {
+                return '<span style="color: ' . $color . '">' . $color . '</span>';
+            });
             $grid->status('状态')->display(function($status) {
               $text =  $status == 1 ? '开启' : '关闭';
               $color =  $status == 1 ? 'bg-blue' : 'bg-yellow';
@@ -125,6 +128,7 @@ class TemplateController extends Controller
 
             $form->display('id', 'ID');
             $form->image('body_image', '背景图片');
+            $form->color('color', '字体颜色')->default('#000');
             $form->display('created_at', '创建时间');
             $form->display('updated_at', '编辑时间');
         });
