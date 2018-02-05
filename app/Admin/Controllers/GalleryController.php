@@ -78,11 +78,11 @@ class GalleryController extends Controller
             $grid->model()->orderby('id', 'desc');
             $grid->id('ID')->sortable();
             $grid->column('category.title', '分类名称')->badge('green');
-            $grid->title('名称');
+            // $grid->title('名称');
             $grid->value('图片')->image();
-            $grid->description('简述')->display(function ($str) {
-              return '<div style="width:250px;height:120px;">'. $str . '</div>';
-            });
+            // $grid->description('简述')->display(function ($str) {
+            //   return '<div style="width:250px;height:120px;">'. $str . '</div>';
+            // });
             $grid->click_num('数据信息')->display(function($click_num) {
               return '点击量: '.$this->click_num.'<br/>'.'使用量: '.$this->use_num;
             });
@@ -98,14 +98,11 @@ class GalleryController extends Controller
                 $filter->disableIdFilter();
 
                 // 在这里添加字段过滤器
-                $filter->where(function($query) {
-                  $query->where('title', 'like', "%{$this->input}%")->orWhere('description', 'like', "%{$this->input}%");
-                }, '名称或简述');
-                $filter->where(function($query) {
-                  $query->whereHas('category', function($query) {
-                    $query->where('title', 'like', "%{$this->input}%");
-                  });
-                }, '分类名称')->select(Category::buildSelectOptions($nodes = [], $parentId = Category::TUPIAN_PID, $prefix = ''));;
+                //$filter->where(function($query) {
+                //  $query->where('title', 'like', "%{$this->input}%")->orWhere('description', 'like', "%{$this->input}%");
+                //}, '名称或简述');
+               
+                 $filter->equal('category_id', '分类')->select(Category::buildSelectOptions($nodes = [], $parentId = Category::TUPIAN_PID, $prefix = ''));;
             });
             $grid->tools(function ($tools) {
                 $tools->batch(function ($batch) {
@@ -128,14 +125,14 @@ class GalleryController extends Controller
             $form->display('id', 'ID');
             // $form->select('category_id', '分类')->options(Category::where('parent_id', Category::TUPIAN_PID)->get()->pluck('title', 'id'));
             $form->select('category_id', '分类')->options(Category::buildSelectOptions($nodes = [], $parentId = Category::TUPIAN_PID, $prefix = ''));
-            $form->text('title', '名称')->rules('nullable')->help('**可不填**');
+            // $form->text('title', '名称')->rules('nullable')->help('**可不填**');
             $form->multipleImage('value', '图片')->crop(375, 300)->removable()->help('<span style="color:red;">**添加时允许多图上传。编辑时只允许单图上传**</span>');
             // 剪裁图片
             // $form->image($column[, $label])->crop(int $width, int $height, [int $x, int $y]);
 
             // 加水印
             // $form->image($column[, $label])->insert($watermark, 'center');
-            $form->textarea('description', '简述')->rules('nullable')->help('**可不填**');
+            // $form->textarea('description', '简述')->rules('nullable')->help('**可不填**');
             $form->number('click_num', '点击量')->default(0);
             $form->number('use_num', '使用量')->default(0);
             $states = [

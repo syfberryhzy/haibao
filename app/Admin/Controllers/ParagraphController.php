@@ -99,11 +99,7 @@ class ParagraphController extends Controller
                 ->orWhere('author', 'like', "%{$this->input}%")
                 ->orWhere('value', 'like', "%{$this->input}%");
               }, '来源（作品名）或作者或内容');
-              $filter->where(function ($query) {
-                  $query->whereHas('category', function ($query) {
-                      $query->where('title', 'like', "%{$this->input}%");
-                  });
-              }, '分类名称')->select(Category::buildSelectOptions($nodes = [], $parentId = Category::MEIWEN_PID, $prefix = ''));
+              $filter->equal('category_id', '分类名称')->select(Category::buildSelectOptions($nodes = [], $parentId = Category::MEIWEN_PID, $prefix = ''));
             });
             $grid->tools(function ($tools) {
               $tools->batch(function ($batch) {

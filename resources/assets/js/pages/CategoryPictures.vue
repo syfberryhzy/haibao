@@ -2,12 +2,14 @@
     <div class="container h-full">
         <div class="weui-panel weui-panel_access">
             <div class="weui-panel__hd">{{title}}</div>
-            <div class="weui-panel__bd gallery-list">
+            <div class="weui-panel__bd gallery-list"> 
+		<div>
                 <img v-for="(picture, index) in pictures" 
                     :key="index" 
                     v-lazy="'/uploads/' + picture.value" 
                     @click="change(index, '/uploads/' + picture.value)" 
                     class="haibao-img">
+		</div>
             </div>
         </div>
     </div>
