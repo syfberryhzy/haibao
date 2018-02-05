@@ -44,7 +44,7 @@ class WeChatController extends Controller
 
         // 构建存储的文件夹规则，值如：uploads/images/avatars/201709/21/
         // 文件夹切割能让查找效率更高。
-        $folder_name = "uploads/images/$folder/" . date("Ym", time()) . '/'.date("d", time()).'/';
+        $folder_name = "uploads/images/fontend/" . date("Ym", time()) . '/'.date("d", time()).'/';
 
         // 文件具体存储的物理路径，`public_path()` 获取的是 `public` 文件夹的物理路径。
         // 值如：/home/vagrant/Code/larabbs/public/uploads/images/avatars/201709/21/
@@ -54,7 +54,7 @@ class WeChatController extends Controller
 
         $this->cropSize($upload_path . '/' . $filename);
 
-        return '/uploads/' . $filename;
+        return '/' .  $folder_name . $filename;
     }
 
     public function cropSize($file_path)
@@ -63,7 +63,10 @@ class WeChatController extends Controller
         $image = Image::make($file_path);
 
         // 进行大小调整的操作
-        $image->crop(375, 300);
+	$image->resize(375, null, function ($constraint) {
+		$constraint->aspectRatio();
+		$constraint->upsize();
+	})->crop(375, 300);
 
         // 对图片修改后进行保存
         $image->save();
