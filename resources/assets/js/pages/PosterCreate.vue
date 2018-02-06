@@ -123,6 +123,7 @@ export default {
             });
         },
         changePicture() {
+            var that = this;
             weui.actionSheet([
                 {
                     label: '自己上传',
