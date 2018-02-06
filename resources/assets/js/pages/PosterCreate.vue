@@ -24,7 +24,7 @@
         <div id="cropper" v-show="cropImg">
             <img id="image" :src="img" width="100%" height="100%">
         </div>
-        <a v-show="cropImg" id="crop" href="javascript:;" class="weui-btn weui-btn_primary" @click="crop">裁剪</a>
+        <a v-show="cropImg" id="crop" class="weui-btn weui-btn_primary" href="javascript:;" @click="crop">裁剪</a>
     </div>
 </template>
 
@@ -47,10 +47,11 @@ export default {
                 color: this.template.color
             },
             cropper: '',
-            cropImg: false
+            cropImg: true
         }
     },
     created() {
+        this.cropImg = false;
         let lettre = Cookies.getJSON('lettre'),
             picture = Cookies.getJSON('picture');
         if (typeof picture === 'object') {
@@ -70,16 +71,18 @@ export default {
     },
     methods: {
         cropperImg() {
-            var image = document.getElementById('image');
-            this.cropper = new Cropper(image, {
-                aspectRatio: 5 / 4,
-                crop: function(e) {
-                }
-            });
+            // var image = document.getElementById('image');
+            // this.cropper = new Cropper(image, {
+            //     aspectRatio: 5 / 4,
+            //     crop: function(e) {
+            //     }
+            // });
         },
         crop() {
+            console.log(this.cropper);
             $('#img-top').attr('src', this.cropper.getCroppedCanvas().toDataURL());
             this.cropImg = false;
+            console.log(this.cropper);
         },
         share() {
             weui.alert('请长按图片保存到本地后发送给好友', { title: '分享提示' });
@@ -123,7 +126,7 @@ export default {
             });
         },
         changePicture() {
-            var that = this;
+            let that = this;
             weui.actionSheet([
                 {
                     label: '自己上传',
@@ -154,14 +157,23 @@ export default {
                         });
                     }
                 }, {
-                    label: '从美图中选择',
-                    onClick: function () {
-                        window.location.href = '/pictures'
-                    }
-                }, {
-                    label: '裁剪美图',
+                    label: '裁剪图片',
                     onClick: function () {
                         that.cropImg = true;
+                        var image = document.getElementById('image');
+                        if (typeof that.cropper === 'string') {     
+                            that.cropper = new Cropper(image, {
+                                aspectRatio: 5 / 4,
+                                crop: function(e) {
+                                }
+                            });
+                        }
+                    }
+                }, {
+                    label: '从美图中选择',
+                    onClick: function () {
+                        console.log('从美图中选择');
+                        window.location.href = '/pictures'
                     }
                 }
             ], [
