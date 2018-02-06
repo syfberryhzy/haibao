@@ -20,6 +20,8 @@ Vue.use(VueLazyLoad,{
     loading:'/images/loading.gif'
 })
 
+window.Cropper = require('cropperjs');
+
 // Register a global custom directive called `v-focus`
 Vue.directive('focus', {
    // When the bound element is inserted into the DOM...

@@ -64,7 +64,7 @@ export default {
             });
         },
         hotChange(id, img) {
-            weui.confirm(`<img src="${img}">`, {
+            weui.confirm(`<img src="${img}" width="100%">`, {
                 title: '确认选用该美图吗?',
                 buttons: [{
                     label: '再看看',

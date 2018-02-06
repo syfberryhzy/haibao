@@ -21,6 +21,10 @@
             <img src="/images/share.png" class="poster-show-share" @click="share">
             <img v-if="posterImg" :src="posterImg" class="poster-img" alt="">
         </div>
+        <div id="cropper" v-show="cropImg">
+            <img id="image" src="/uploads/images/WechatIMG73.jpeg" width="100%" height="100%">
+        </div>
+        <a v-show="cropImg" id="crop" href="javascript:;" class="weui-btn weui-btn_primary" @click="crop">裁剪</a>
     </div>
 </template>
 
@@ -41,13 +45,14 @@ export default {
             },
             fontColor: {
                 color: this.template.color
-            }
+            },
+            cropper: '',
+            cropImg: false
         }
     },
     created() {
         let lettre = Cookies.getJSON('lettre'),
             picture = Cookies.getJSON('picture');
-            console.log(picture);
         if (typeof picture === 'object') {
             this.img = '/uploads/' + picture.value;
         } else if (typeof picture === 'string') {
@@ -59,9 +64,23 @@ export default {
         } else if (typeof lettre === 'string') {
             this.contract = lettre;
         }
-        
+        setTimeout(() => {
+            this.cropperImg();
+        });
     },
     methods: {
+        cropperImg() {
+            var image = document.getElementById('image');
+            this.cropper = new Cropper(image, {
+                aspectRatio: 5 / 4,
+                crop: function(e) {
+                }
+            });
+        },
+        crop() {
+            $('#img-top').attr('src', this.cropper.getCroppedCanvas().toDataURL());
+            this.cropImg = false;
+        },
         share() {
             weui.alert('请长按图片保存到本地后发送给好友', { title: '分享提示' });
         },
@@ -82,7 +101,6 @@ export default {
                     label: '自己编写',
                     onClick: function () {
                         weui.alert('请在下方编辑器里面输入美文')
-			// this.focusStatus = true;
                     }
                 }, {
                     label: '从美文中选择',
@@ -115,33 +133,23 @@ export default {
                             sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
                             success: function (res) {
                                 var localId = res.localIds[0];
-                                // if (window.__wxjs_is_wkwebview == true) {
-                                //     wx.getLocalImgData({
-                                //         localId: localId, // 图片的localID
-                                //         success: function (res) {
-                                //             console.log(res);
-                                //             var img = res.localData;
-                                //             Cookies.set('picture', img);
-                                //             $('#img-top').attr('src', img);
-                                //         }
-                                //     });
-                                // } else {
-                                    wx.uploadImage({
-                                        localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
-                                        isShowProgressTips: 1, // 默认为1，显示进度提示
-                                        success: function (res) {
-                                            var serverId = res.serverId; // 返回图片的服务器端ID
-                                            axios.post('/wechat/upload', {
-                                                serverId: serverId
-                                            }).then(response => {
-                                                console.log(response);
-                                                var img = response.data;
-                                                Cookies.set('picture', img);
-                                                $('#img-top').attr('src', img);
-                                            })
-                                        }
-                                    });
-                                // }
+                                wx.uploadImage({
+                                    localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
+                                    isShowProgressTips: 1, // 默认为1，显示进度提示
+                                    success: function (res) {
+                                        var serverId = res.serverId; // 返回图片的服务器端ID
+                                        axios.post('/wechat/upload', {
+                                            serverId: serverId
+                                        }).then(response => {
+                                            var img = response.data;
+                                            Cookies.set('picture', img);
+                                            $('#img-top').attr('src', img);
+                                            $('#image').attr('src', img);
+                                            this.cropImg = true;
+                                            this.cropperImg();
+                                        })
+                                    }
+                                });
                             }
                         });
                     }

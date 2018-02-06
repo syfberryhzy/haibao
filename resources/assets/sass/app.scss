@@ -7,6 +7,8 @@
 
 // Bootstrap
 // @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+@import "~cropperjs/dist/cropper.css";
 body {
     background: $body-bg;
 }
@@ -138,4 +140,22 @@ a.picture-more {
     top: 53.3vh;
     right: 20px;
     z-index: 6;
+}
+#cropper {
+    position: absolute;
+    z-index: 6;
+
+    img {
+        max-width: 100%;
+    }
+}
+
+#crop {
+    position: absolute;
+    z-index: 7;
+    bottom: 20px;
+    left: 50%;
+    width: 2rem;
+    margin-left: -1rem;
+    font-size: 17px;
 }
