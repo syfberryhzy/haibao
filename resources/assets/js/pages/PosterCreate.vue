@@ -22,7 +22,7 @@
             <img v-if="posterImg" :src="posterImg" class="poster-img" alt="">
         </div>
         <div id="cropper" v-show="cropImg">
-            <img id="image" src="/uploads/images/WechatIMG73.jpeg" width="100%" height="100%">
+            <img id="image" :src="img" width="100%" height="100%">
         </div>
         <a v-show="cropImg" id="crop" href="javascript:;" class="weui-btn weui-btn_primary" @click="crop">裁剪</a>
     </div>
@@ -146,7 +146,6 @@ export default {
                                             $('#img-top').attr('src', img);
                                             $('#image').attr('src', img);
                                             this.cropImg = true;
-                                            this.cropperImg();
                                         })
                                     }
                                 });
@@ -156,7 +155,12 @@ export default {
                 }, {
                     label: '从美图中选择',
                     onClick: function () {
-                        console.log('从美图中选择');
+                        window.location.href = '/pictures'
+                    }
+                }, {
+                    label: '裁剪美图',
+                    onClick: function () {
+                        that.cropImg = true;
                         window.location.href = '/pictures'
                     }
                 }
