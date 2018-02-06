@@ -162,7 +162,6 @@ export default {
                     label: '裁剪美图',
                     onClick: function () {
                         that.cropImg = true;
-                        window.location.href = '/pictures'
                     }
                 }
             ], [
