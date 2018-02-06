@@ -14,6 +14,8 @@ require('weui');
 
 window.Cookies = require('js-cookie');
 
+window.Cropper = require('cropperjs');
+
 window.VueLazyLoad = require('vue-lazyload');
 Vue.use(VueLazyLoad,{
     error:'./static/error.png',

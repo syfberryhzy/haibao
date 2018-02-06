@@ -7,6 +7,7 @@
 
 // Bootstrap
 // @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+@import '~cropperjs/dist/cropper.css';
 body {
     background: $body-bg;
 }
@@ -138,4 +139,10 @@ a.picture-more {
     top: 53.3vh;
     right: 20px;
     z-index: 6;
+}
+
+.cropper {
+    img {
+        max-width: 100%;
+    }
 }

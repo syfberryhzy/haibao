@@ -3,7 +3,7 @@
         <div class="bg" :style="bg"></div>
         <div class="center" data-html2canvas-ignore="true"></div>
         <div class="top" v-show="poster">
-            <div class="poster-create-top">
+            <div class="poster-create-top" style="height: 300px;with: 375px;overflow: hidden">
                 <img :src="img" width="100%" height="100%" id="img-top">
                 <div class="change-upload" @click="changePicture" data-html2canvas-ignore="true">
                     <img src="/images/upload.png" alt="">
@@ -16,6 +16,9 @@
                 <textarea :style="fontColor" v-focus="focusStatus" contenteditable="true" name="" id="" cols="30" rows="8" placeholder="请留下你的声音" v-model="contract" @change="changContract"></textarea>
                 <a href="javascript:;" class="weui-btn weui-btn_primary" data-html2canvas-ignore="true" @click="createImg">生成海报</a>
             </div>
+        </div>
+        <div class="cropper" style="position: absolute;z-index: 10;width: 80%; left: 10%">
+            <img id="image" src="/images/poster.png">
         </div>
         <div class="canvas" v-show="!poster">
             <img src="/images/share.png" class="poster-show-share" @click="share">
@@ -47,7 +50,6 @@ export default {
     created() {
         let lettre = Cookies.getJSON('lettre'),
             picture = Cookies.getJSON('picture');
-            console.log(picture);
         if (typeof picture === 'object') {
             this.img = '/uploads/' + picture.value;
         } else if (typeof picture === 'string') {
@@ -59,7 +61,22 @@ export default {
         } else if (typeof lettre === 'string') {
             this.contract = lettre;
         }
-        
+        setTimeout(() => {
+            var image = document.getElementById('image');
+            var cropper = new Cropper(image, {
+                aspectRatio: 5 / 4,
+                preview: ".poster-create-top",
+                crop: function(e) {
+                    console.log(e.detail.x);
+                    console.log(e.detail.y);
+                    console.log(e.detail.width);
+                    console.log(e.detail.height);
+                    console.log(e.detail.rotate);
+                    console.log(e.detail.scaleX);
+                    console.log(e.detail.scaleY);
+                }
+            });
+        });
     },
     methods: {
         share() {
