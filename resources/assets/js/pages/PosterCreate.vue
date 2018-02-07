@@ -4,7 +4,7 @@
         <div class="center" data-html2canvas-ignore="true"></div>
         <div class="top" v-show="poster">
             <div class="poster-create-top" style="height: 300px;with: 375px;overflow: hidden">
-                <img :src="img" width="100%" height="100%" id="img-top">
+                <img :src="img" :style="templateStyle" id="img-top">
                 <div class="change-upload" @click="changePicture" data-html2canvas-ignore="true">
                     <img src="/images/upload.png" alt="">
                     <p>点击修改图片</p>
@@ -45,6 +45,10 @@ export default {
             },
             fontColor: {
                 color: this.template.color
+            },
+            templateStyle: {
+                width: `calc(100vw - ${this.template.left}px - ${this.template.right}px)`,
+                height: `calc(300px - ${this.template.top}px - ${this.template.bottom}px)`
             },
             cropper: '',
             cropImg: true,

@@ -83,6 +83,10 @@ class TemplateController extends Controller
             $grid->color('字体颜色')->display(function ($color) {
                 return '<span style="color: ' . $color . '">' . $color . '</span>';
             });
+            $grid->top('上边距');
+            $grid->left('左边距');
+            $grid->bottom('下边距');
+            $grid->right('右边距');
             $grid->status('状态')->display(function($status) {
               $text =  $status == 1 ? '开启' : '关闭';
               $color =  $status == 1 ? 'bg-blue' : 'bg-yellow';
@@ -129,6 +133,10 @@ class TemplateController extends Controller
             $form->display('id', 'ID');
             $form->image('body_image', '背景图片');
             $form->color('color', '字体颜色')->default('#000');
+            $form->text('top', '上边距');
+            $form->text('left', '左边距');
+            $form->text('right', '下边距');
+            $form->text('bottom', '右边距');
             $form->display('created_at', '创建时间');
             $form->display('updated_at', '编辑时间');
         });

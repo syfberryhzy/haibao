@@ -36,6 +36,9 @@ body {
 }
 .poster-create-top {
     height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     .change-upload {
         position: absolute;
