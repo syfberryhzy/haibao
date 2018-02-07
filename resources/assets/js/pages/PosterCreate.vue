@@ -47,8 +47,8 @@ export default {
                 color: this.template.color
             },
             templateStyle: {
-                width: `calc(100vw - ${this.template.left}px - ${this.template.right}px)`,
-                height: `calc(300px - ${this.template.top}px - ${this.template.bottom}px)`
+                width: `calc(100vw - ${this.template.left / 37.5}rem - ${this.template.right / 37.5}rem)`,
+                height: `calc(300px - ${this.template.top / 37.5}rem - ${this.template.bottom / 37.5}rem)`
             },
             cropper: '',
             cropImg: true,
@@ -167,7 +167,7 @@ export default {
                                         }).then(response => {
                                             var img = response.data;
                                             that.img = img;
-                                            that.cropImg = true;
+                                            $('#image').attr('src', img);
                                             that.cropImg = true;
                                             var image = document.getElementById('image');
                                             if (typeof that.cropper === 'string') {     
