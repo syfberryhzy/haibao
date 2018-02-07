@@ -3,7 +3,7 @@
         <div class="bg" :style="bg"></div>
         <div class="center" data-html2canvas-ignore="true"></div>
         <div class="top" v-show="poster">
-            <div class="poster-create-top" style="height: 300px;with: 375px;overflow: hidden">
+            <div class="poster-create-top" style="height: 80vw;with: 375px;overflow: hidden">
                 <img :src="img" :style="templateStyle" id="img-top">
                 <div class="change-upload" @click="changePicture" data-html2canvas-ignore="true">
                     <img src="/images/upload.png" alt="">
@@ -48,7 +48,7 @@ export default {
             },
             templateStyle: {
                 width: `calc(100vw - ${this.template.left / 37.5}rem - ${this.template.right / 37.5}rem)`,
-                height: `calc(300px - ${this.template.top / 37.5}rem - ${this.template.bottom / 37.5}rem)`
+                height: `calc(80vw - ${this.template.top / 37.5}rem - ${this.template.bottom / 37.5}rem)`
             },
             cropper: '',
             cropImg: true,
