@@ -54,15 +54,18 @@ export default {
         this.cropImg = false;
         let lettre = JSON.parse(localStorage.getItem('lettre')),
             picture = JSON.parse(localStorage.getItem('picture'));
-        if (typeof picture === 'object') {
+
+        if (picture !== null && typeof picture === 'object') {
             this.img = '/uploads/' + picture.value;
         } else if (typeof picture === 'string') {
             this.img = picture;
         }
-        if (typeof lettre === 'object') {
+        if (lettre !== null && typeof lettre === 'object') {
             this.contract = lettre.value;
             this.title = `${lettre.author} | ${lettre.title}`
         } else if (typeof lettre === 'string') {
+            this.contract = lettre;
+        } else {
             this.contract = lettre;
         }
     },
@@ -81,7 +84,7 @@ export default {
             this.title = '';
             let lettre = JSON.parse(localStorage.getItem('lettre')), value = '';
 
-            if (typeof lettre === 'object') {
+            if (lettre !== null && typeof lettre === 'object') {
                 if (e.target.value === lettre.value) {
                     this.title = `${lettre.author} | ${lettre.title}`
                 }
@@ -189,7 +192,7 @@ export default {
             });
             var lettre = JSON.parse(localStorage.getItem('lettre'));
            
-            if (typeof lettre === 'object') {
+            if (lettre !== null && typeof lettre === 'object') {
                 let contract = lettre.value;
                 if (contract !== this.contract) {
                     localStorage.setItem('lettre', this.contract);
