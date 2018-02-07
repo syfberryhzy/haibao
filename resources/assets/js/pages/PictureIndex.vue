@@ -57,14 +57,14 @@ export default {
                     label: '确认',
                     type: 'primary',
                     onClick: () => {
-                        Cookies.set('picture', this.newpictures[id]);
+                        localStorage.setItem('picture', JSON.stringify(this.newpictures[id]));
                         window.location.href = '/user/poster/create'
                     }
                 }]
             });
         },
         hotChange(id, img) {
-            weui.confirm(`<img src="${img}">`, {
+            weui.confirm(`<img src="${img}" width="100%">`, {
                 title: '确认选用该美图吗?',
                 buttons: [{
                     label: '再看看',
@@ -76,7 +76,7 @@ export default {
                     label: '确认',
                     type: 'primary',
                     onClick: () => {
-                        Cookies.set('picture', this.hotpictures[id]);
+                        localStorage.setItem('picture', JSON.stringify(this.hotpictures[id]));
                         window.location.href = '/user/poster/create'
                     }
                 }]

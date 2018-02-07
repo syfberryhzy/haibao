@@ -13,7 +13,7 @@ require('amfe-flexible');
 require('weui');
 
 window.Cookies = require('js-cookie');
-
+window.localStorage = require('localStorage')
 window.Cropper = require('cropperjs');
 
 window.VueLazyLoad = require('vue-lazyload');
@@ -21,6 +21,8 @@ Vue.use(VueLazyLoad,{
     error:'./static/error.png',
     loading:'/images/loading.gif'
 })
+
+window.Cropper = require('cropperjs');
 
 // Register a global custom directive called `v-focus`
 Vue.directive('focus', {

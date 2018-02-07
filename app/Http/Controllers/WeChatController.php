@@ -52,7 +52,7 @@ class WeChatController extends Controller
 
         $filename = $stream->save($upload_path);
 
-        $this->cropSize($upload_path . '/' . $filename);
+        // $this->cropSize($upload_path . '/' . $filename);
 
         return '/' .  $folder_name . $filename;
     }

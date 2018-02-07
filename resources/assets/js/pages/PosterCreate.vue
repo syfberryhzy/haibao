@@ -17,13 +17,14 @@
                 <a href="javascript:;" class="weui-btn weui-btn_primary" data-html2canvas-ignore="true" @click="createImg">生成海报</a>
             </div>
         </div>
-        <div class="cropper" style="position: absolute;z-index: 10;width: 80%; left: 10%">
-            <img id="image" src="/images/poster.png">
-        </div>
         <div class="canvas" v-show="!poster">
             <img src="/images/share.png" class="poster-show-share" @click="share">
             <img v-if="posterImg" :src="posterImg" class="poster-img" alt="">
         </div>
+        <div id="cropper" v-show="cropImg">
+            <img id="image" :src="img" width="100%" height="100%">
+        </div>
+        <a v-show="cropImg" id="crop" class="weui-btn weui-btn_primary" href="javascript:;" @click="crop">裁剪</a>
     </div>
 </template>
 
@@ -44,12 +45,15 @@ export default {
             },
             fontColor: {
                 color: this.template.color
-            }
+            },
+            cropper: '',
+            cropImg: true
         }
     },
     created() {
-        let lettre = Cookies.getJSON('lettre'),
-            picture = Cookies.getJSON('picture');
+        this.cropImg = false;
+        let lettre = JSON.parse(localStorage.getItem('lettre')),
+            picture = JSON.parse(localStorage.getItem('picture'));
         if (typeof picture === 'object') {
             this.img = '/uploads/' + picture.value;
         } else if (typeof picture === 'string') {
@@ -61,31 +65,22 @@ export default {
         } else if (typeof lettre === 'string') {
             this.contract = lettre;
         }
-        setTimeout(() => {
-            var image = document.getElementById('image');
-            var cropper = new Cropper(image, {
-                aspectRatio: 5 / 4,
-                preview: ".poster-create-top",
-                crop: function(e) {
-                    console.log(e.detail.x);
-                    console.log(e.detail.y);
-                    console.log(e.detail.width);
-                    console.log(e.detail.height);
-                    console.log(e.detail.rotate);
-                    console.log(e.detail.scaleX);
-                    console.log(e.detail.scaleY);
-                }
-            });
-        });
     },
     methods: {
+        crop() {
+            let dataUrl = this.cropper.getCroppedCanvas().toDataURL();
+            $('#img-top').attr('src', dataUrl);
+            this.cropImg = false;
+            localStorage.setItem('picture', dataUrl);
+        },
         share() {
             weui.alert('请长按图片保存到本地后发送给好友', { title: '分享提示' });
         },
         changContract(e) {
             this.contract = e.target.value;
             this.title = '';
-            let lettre = Cookies.getJSON('lettre'), value = '';
+            let lettre = JSON.parse(localStorage.getItem('lettre')), value = '';
+
             if (typeof lettre === 'object') {
                 if (e.target.value === lettre.value) {
                     this.title = `${lettre.author} | ${lettre.title}`
@@ -99,7 +94,6 @@ export default {
                     label: '自己编写',
                     onClick: function () {
                         weui.alert('请在下方编辑器里面输入美文')
-			// this.focusStatus = true;
                     }
                 }, {
                     label: '从美文中选择',
@@ -122,6 +116,7 @@ export default {
             });
         },
         changePicture() {
+            let that = this;
             weui.actionSheet([
                 {
                     label: '自己上传',
@@ -132,33 +127,29 @@ export default {
                             sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
                             success: function (res) {
                                 var localId = res.localIds[0];
-                                // if (window.__wxjs_is_wkwebview == true) {
-                                //     wx.getLocalImgData({
-                                //         localId: localId, // 图片的localID
-                                //         success: function (res) {
-                                //             console.log(res);
-                                //             var img = res.localData;
-                                //             Cookies.set('picture', img);
-                                //             $('#img-top').attr('src', img);
-                                //         }
-                                //     });
-                                // } else {
-                                    wx.uploadImage({
-                                        localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
-                                        isShowProgressTips: 1, // 默认为1，显示进度提示
-                                        success: function (res) {
-                                            var serverId = res.serverId; // 返回图片的服务器端ID
-                                            axios.post('/wechat/upload', {
-                                                serverId: serverId
-                                            }).then(response => {
-                                                console.log(response);
-                                                var img = response.data;
-                                                Cookies.set('picture', img);
-                                                $('#img-top').attr('src', img);
-                                            })
-                                        }
-                                    });
-                                // }
+                                wx.uploadImage({
+                                    localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
+                                    isShowProgressTips: 1, // 默认为1，显示进度提示
+                                    success: function (res) {
+                                        var serverId = res.serverId; // 返回图片的服务器端ID
+                                        axios.post('/wechat/upload', {
+                                            serverId: serverId
+                                        }).then(response => {
+                                            var img = response.data;
+                                            that.img = img;
+                                            that.cropImg = true;
+                                            that.cropImg = true;
+                                            var image = document.getElementById('image');
+                                            if (typeof that.cropper === 'string') {     
+                                                that.cropper = new Cropper(image, {
+                                                    aspectRatio: 5 / 4,
+                                                    crop: function(e) {
+                                                    }
+                                                });
+                                            }
+                                        })
+                                    }
+                                });
                             }
                         });
                     }
@@ -196,15 +187,15 @@ export default {
             var loading = weui.loading('海报生成中', {
                 className: 'custom-classname'
             });
-            var lettre = Cookies.getJSON('lettre');
+            var lettre = JSON.parse(localStorage.getItem('lettre'));
            
             if (typeof lettre === 'object') {
                 let contract = lettre.value;
-            if (contract !== this.contract) {
-                Cookies.set('lettre', this.contract);
-            }
+                if (contract !== this.contract) {
+                    localStorage.setItem('lettre', this.contract);
+                }
             } else if (typeof lettre === 'string') {
-                Cookies.set('lettre', this.contract);
+                localStorage.setItem('lettre', this.contract);
             }
             html2canvas(document.querySelector("#poster"), {
                 imageTimeout: 15000

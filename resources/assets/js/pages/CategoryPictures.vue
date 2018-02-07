@@ -37,7 +37,7 @@ export default {
                     label: '确认',
                     type: 'primary',
                     onClick: () => {
-                        Cookies.set('picture', this.pictures[id]);
+                        localStorage.setItem('picture', JSON.stringify(this.pictures[id]));
                         window.location.href = '/user/poster/create'
                     }
                 }]
