@@ -47,29 +47,52 @@ export default {
                 color: this.template.color
             },
             cropper: '',
-            cropImg: true
+            cropImg: true,
+            lettre: '',
+            picture: ''
         }
     },
     created() {
         this.cropImg = false;
-        let lettre = JSON.parse(localStorage.getItem('lettre')),
-            picture = JSON.parse(localStorage.getItem('picture'));
 
-        if (picture !== null && typeof picture === 'object') {
-            this.img = '/uploads/' + picture.value;
-        } else if (typeof picture === 'string') {
-            this.img = picture;
+        let lettre = localStorage.getItem('lettre'),
+            picture = localStorage.getItem('picture');
+        
+        this.lettre = this.isJSON(lettre) ? JSON.parse(lettre) : lettre;
+        this.picture = this.isJSON(picture) ? JSON.parse(picture) : picture;
+
+        if (this.picture !== null && typeof this.picture === 'object') {
+            this.img = '/uploads/' + this.picture.value;
+        } else if (typeof this.picture === 'string') {
+            this.img = this.picture;
         }
-        if (lettre !== null && typeof lettre === 'object') {
-            this.contract = lettre.value;
-            this.title = `${lettre.author} | ${lettre.title}`
-        } else if (typeof lettre === 'string') {
-            this.contract = lettre;
+        if (this.lettre !== null && typeof this.lettre === 'object') {
+            this.contract = this.lettre.value;
+            this.title = `${this.lettre.author} | ${this.lettre.title}`
+        } else if (typeof this.lettre === 'string') {
+            this.contract = this.lettre;
         } else {
-            this.contract = lettre;
+            this.contract = this.lettre;
         }
     },
     methods: {
+        isJSON (str) {
+            if (typeof str == 'string') {
+                try {
+                    var obj = JSON.parse(str);
+                    if(str.indexOf('{')>-1){
+                        return true;
+                    }else{
+                        return false;
+                    }
+
+                } catch(e) {
+                    console.log(e);
+                    return false;
+                }
+            }
+            return false;
+        },
         crop() {
             let dataUrl = this.cropper.getCroppedCanvas().toDataURL();
             $('#img-top').attr('src', dataUrl);
@@ -82,7 +105,7 @@ export default {
         changContract(e) {
             this.contract = e.target.value;
             this.title = '';
-            let lettre = JSON.parse(localStorage.getItem('lettre')), value = '';
+            let lettre = this.lettre, value = '';
 
             if (lettre !== null && typeof lettre === 'object') {
                 if (e.target.value === lettre.value) {
@@ -190,7 +213,7 @@ export default {
             var loading = weui.loading('海报生成中', {
                 className: 'custom-classname'
             });
-            var lettre = JSON.parse(localStorage.getItem('lettre'));
+            var lettre = this.lettre;
            
             if (lettre !== null && typeof lettre === 'object') {
                 let contract = lettre.value;
