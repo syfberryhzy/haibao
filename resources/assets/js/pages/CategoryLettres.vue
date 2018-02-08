@@ -4,7 +4,7 @@
             <div class="weui-panel__hd">{{title}}</div>
             <div class="weui-panel__bd">
                 <div v-for="(lettre, index) in lettres" :key="index" class="weui-media-box weui-media-box_text">
-                    <h4 class="weui-media-box__title" style="line-height: 2.3;">{{ lettre.author }}《{{ lettre.title }}》<a href="javascript:;" @click="change(index)" class="weui-btn weui-btn_mini weui-btn_plain-primary" style="float:right">选用</a></h4>
+                    <h4 class="weui-media-box__title" style="line-height: 2.3;">{{ lettre.author }} {{ lettre.title }}<a href="javascript:;" @click="change(index)" class="weui-btn weui-btn_mini weui-btn_plain-primary" style="float:right">选用</a></h4>
                     <p class="weui-media-box__desc">{{ lettre.value }}</p>
                 </div>
             </div>

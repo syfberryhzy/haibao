@@ -58,7 +58,7 @@ export default {
     },
     created() {
         this.cropImg = false;
-
+console.log(window.devicePixelRatio);
         let lettre = localStorage.getItem('lettre'),
             picture = localStorage.getItem('picture');
         
@@ -72,7 +72,7 @@ export default {
         }
         if (this.lettre !== null && typeof this.lettre === 'object') {
             this.contract = this.lettre.value;
-            this.title = `${this.lettre.author} | ${this.lettre.title}`
+            this.title = `${this.lettre.author ? this.lettre.author : ''}  ${this.lettre.title ? this.lettre.title : ''}`
         } else if (typeof this.lettre === 'string') {
             this.contract = this.lettre;
         } else {
@@ -113,7 +113,7 @@ export default {
 
             if (lettre !== null && typeof lettre === 'object') {
                 if (e.target.value === lettre.value) {
-                    this.title = `${lettre.author} | ${lettre.title}`
+                    this.title = `${lettre.author ? lettre.author : ''} | ${lettre.title ? lettre.title : ''}`
                 }
             }
 
@@ -172,7 +172,7 @@ export default {
                                             var image = document.getElementById('image');
                                             if (typeof that.cropper === 'string') {     
                                                 that.cropper = new Cropper(image, {
-                                                    aspectRatio: 5 / 4,
+                                                    aspectRatio: (375 - that.template.left - that.template.right) / (300 - that.template.top - that.template.bottom),
                                                     crop: function(e) {
                                                     }
                                                 });
@@ -228,7 +228,8 @@ export default {
                 localStorage.setItem('lettre', this.contract);
             }
             html2canvas(document.querySelector("#poster"), {
-                imageTimeout: 15000
+                imageTimeout: 15000,
+		scale: 6
             }).then(canvas => {
                 var img = new Image();
                 img.src = canvas.toDataURL();

@@ -126,7 +126,7 @@ class GalleryController extends Controller
             // $form->select('category_id', '分类')->options(Category::where('parent_id', Category::TUPIAN_PID)->get()->pluck('title', 'id'));
             $form->select('category_id', '分类')->options(Category::buildSelectOptions($nodes = [], $parentId = Category::TUPIAN_PID, $prefix = ''));
             // $form->text('title', '名称')->rules('nullable')->help('**可不填**');
-            $form->multipleImage('value', '图片')->crop(375, 300)->removable()->help('<span style="color:red;">**添加时允许多图上传。编辑时只允许单图上传**</span>');
+            $form->multipleImage('value', '图片')->removable()->help('<span style="color:red;">**添加时允许多图上传。编辑时只允许单图上传**</span>');
             // 剪裁图片
             // $form->image($column[, $label])->crop(int $width, int $height, [int $x, int $y]);
 
