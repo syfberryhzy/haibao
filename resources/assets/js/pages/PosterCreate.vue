@@ -10,10 +10,21 @@
                     <p>点击修改图片</p>
                 </div>
             </div>
-            <div class="poster-create-bottom" :style="fontColor">
-                <p v-if="title">&nbsp;{{ title }}<a class="belles-lettres" href="javascript:;" @click="changeLettre" data-html2canvas-ignore="true"><img src="/images/edit.png" alt=""></a></p>
-                <p v-else>&nbsp;<a class="belles-lettres" href="javascript:;" @click="changeLettre" data-html2canvas-ignore="true"><img src="/images/edit.png" alt=""></a></p>
-                <textarea :style="fontColor" v-focus="focusStatus" contenteditable="true" name="" id="" cols="30" rows="8" placeholder="请留下你的声音" v-model="contract" @change="changContract"></textarea>
+            <div class="poster-create-title">
+                <p :style="fontColor">&nbsp;{{ title }}</p>
+            </div>
+            <div class="poster-create-desc">
+                <textarea :style="fontColor" 
+                    v-focus="focusStatus" 
+                    cols="30" rows="8" 
+                    v-model="contract" 
+                    @change="changContract">
+                </textarea>
+                <a href="javascript:;" v-if="!edit" class="change-lettre" @click="changeLettre" data-html2canvas-ignore="true">
+                    <img src="/images/pan.png" alt="">
+                </a>
+            </div>
+            <div class="poster-create-bottom">
                 <a href="javascript:;" class="weui-btn weui-btn_primary" data-html2canvas-ignore="true" @click="createImg">生成海报</a>
             </div>
         </div>
@@ -53,7 +64,8 @@ export default {
             cropper: '',
             cropImg: true,
             lettre: '',
-            picture: ''
+            picture: '',
+            edit: false,
         }
     },
     created() {
@@ -78,6 +90,9 @@ console.log(window.devicePixelRatio);
         } else {
             this.contract = this.lettre;
         }
+        setTimeout(function () {
+            $("textarea").blur();
+        })
     },
     methods: {
         isJSON (str) {
@@ -117,13 +132,17 @@ console.log(window.devicePixelRatio);
                 }
             }
 
+            this.edit = false;
+
         },
         changeLettre() {
+            var that = this;
             weui.actionSheet([
                 {
                     label: '自己编写',
                     onClick: function () {
-                        weui.alert('请在下方编辑器里面输入美文')
+                        that.edit = true;
+                        $("textarea").focus();
                     }
                 }, {
                     label: '从美文中选择',

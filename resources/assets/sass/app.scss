@@ -69,33 +69,49 @@ a.picture-more {
     color: #1684B2;
 }
 
-.poster-create-bottom {
-    height: 46.7vh;
-    margin: 0 1.5rem;
-    
-    a.belles-lettres {
-        text-align: right;
-        font-size: 15px;
-        color: #1684B2;
-        position: absolute;
-        right: 1.2em;
-    }
-
-    textarea {
-	    text-align: center;
-        border: none;
-        width: 100%;
-        font-size: 14px;
-        background: transparent;
-        line-height: 1.5em;
-    }
-
+.poster-create-title {
     p {
         font-size: 14px;
         text-align: center;
         margin: 3.3vh 0;
     }
 }
+
+.poster-create-desc {
+    margin: 0 1.5rem;
+    height: 4.5rem;
+    overflow: hidden;
+    line-height: 0;
+
+    textarea {
+	    text-align: center;
+        border: none;
+        width: 100%;
+        height: 4.5rem;
+        font-size: 14px;
+        background: transparent;
+        line-height: 1.5em;
+    }
+
+    a.change-lettre {
+        position: relative;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 4.5rem;
+        top: -4.5rem;
+
+        img {
+
+        }
+    }
+}
+.poster-create-bottom {
+    margin: 0 1.5rem;
+    margin-top: 1rem;
+}
+
 .bg {
     background-image: url('/images/templete.png');
     background-size: 100% 100%;
