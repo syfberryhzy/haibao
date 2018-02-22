@@ -31,6 +31,7 @@
         <div class="canvas" v-show="!poster">
             <img src="/images/share.png" class="poster-show-share" @click="share">
             <img v-if="posterImg" :src="posterImg" class="poster-img" alt="">
+            <a v-show="posterImg" id="crop" class="weui-btn weui-btn_primary" href="javascript:;" @click="posterImg = '';poster = true">编辑</a>
         </div>
         <div id="cropper" v-show="cropImg">
             <img id="image" :src="img" width="100%" height="100%">
@@ -55,7 +56,8 @@ export default {
                 backgroundImage: `url(/uploads/${this.template.body_image})`
             },
             fontColor: {
-                color: this.template.color
+                color: this.template.color,
+		letterSpacing: `0.05em`
             },
             templateStyle: {
                 width: `calc(100vw - ${this.template.left / 37.5}rem - ${this.template.right / 37.5}rem)`,
@@ -123,14 +125,18 @@ console.log(window.devicePixelRatio);
         },
         changContract(e) {
             this.contract = e.target.value;
-            this.title = '';
+            // this.title = '';
             let lettre = this.lettre, value = '';
 
             if (lettre !== null && typeof lettre === 'object') {
                 if (e.target.value === lettre.value) {
-                    this.title = `${lettre.author ? lettre.author : ''} | ${lettre.title ? lettre.title : ''}`
+                    // this.title = `${lettre.author ? lettre.author : ''} | ${lettre.title ? lettre.title : ''}`
                 }
             }
+
+	    if (e.target.value == '') {
+	    	this.title = '';
+    	    }
 
             this.edit = false;
 

@@ -16,7 +16,7 @@ class LettreController extends Controller
 
     public function index()
     {
-        $lettreCategory = Category::where('parent_id', Category::MEIWEN_PID)->get();
+        $lettreCategory = Category::where('parent_id', Category::MEIWEN_PID)->orderBy('order', 'asc')->get();
         $hotLettres = Paragraph::where('status', 1)->latest()->paginate(5);
         return view('lettre.index', compact('lettreCategory', 'hotLettres'));
     }

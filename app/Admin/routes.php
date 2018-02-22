@@ -11,7 +11,7 @@ Route::group([
 ], function (Router $router) {
 
     $router->get('/', 'HomeController@index');
-    $router->resource('/users', 'UserController');
+    //$router->resource('/users', 'UserController');
     $router->resource('/category', 'CategoryController');
     $router->resource('/gallery', 'GalleryController');
     $router->resource('/paragraph', 'ParagraphController');
@@ -19,6 +19,6 @@ Route::group([
     $router->resource('/template', 'TemplateController');
     $router->post('/template/checkon', 'TemplateController@checkOn');
     $router->post('/gallery/release', 'GalleryController@release');
-    $router->post('/pragraph/release', 'PragraphController@release');
+    //$router->post('/pragraph/release', 'PragraphController@release');
 
 });

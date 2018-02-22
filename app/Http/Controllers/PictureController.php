@@ -16,7 +16,7 @@ class PictureController extends Controller
 
     public function index()
     {
-        $pictureCategory = Category::where('parent_id', Category::TUPIAN_PID)->get();
+        $pictureCategory = Category::where('parent_id', Category::TUPIAN_PID)->orderBy('order', 'asc')->get();
         $hotPictures = Gallery::where('status', 1)->latest('click_num')->paginate(3);
         $newPictures = Gallery::where('status', 1)->latest()->paginate(3);
         return view('picture.index', compact('pictureCategory', 'hotPictures', 'newPictures'));

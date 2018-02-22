@@ -48,7 +48,7 @@ class Category extends Model
      */
     public function getChildrenCategory()
     {
-        return $this->childrenCategory()->get();
+        return $this->childrenCategory()->orderBy('order', 'asc')->get();
     }
 
     /**

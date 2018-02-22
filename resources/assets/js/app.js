@@ -33,8 +33,8 @@ Vue.directive('focus', {
     }
 });
 
-let VConsole = require('vconsole');
-let vConsole = new VConsole();
+//let VConsole = require('vconsole');
+//let vConsole = new VConsole();
 
 window.wx = require('weixin-js-sdk');
 
